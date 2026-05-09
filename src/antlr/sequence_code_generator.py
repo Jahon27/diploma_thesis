@@ -39,6 +39,21 @@ def emit_message(msg: dict, indent: int = 1) -> list[str]:
 
     return lines
 
+def collect_conditions(messages: list[dict]) -> set[str]:
+    conditions = set()
+
+    for msg in messages:
+        if msg["type"] == "alt":
+            conditions.add(msg["condition"])
+            conditions.update(collect_conditions(msg["then"]))
+            conditions.update(collect_conditions(msg["else"]))
+
+        elif msg["type"] == "loop":
+            conditions.add(msg["condition"])
+            conditions.update(collect_conditions(msg["body"]))
+
+    return conditions
+
 
 def generate_sequence_code(model: dict) -> str:
     lines = []
@@ -56,6 +71,12 @@ def generate_sequence_code(model: dict) -> str:
         lines.append(f"    {var_name} = {class_name}()")
 
     lines.append("")
+
+    for condition in sorted(collect_conditions(messages)):
+        lines.append(f"    {condition} = False")
+
+    if collect_conditions(messages):
+        lines.append("")
 
     for msg in messages:
         if msg["type"] == "return":
