@@ -1,0 +1,10 @@
+participant student Student
+participant address Address
+
+call student address validate
+return address student bool
+call student address outputAsLabel
+return address student str
+return student student bool
+self student purchaseParkingPass
+return student student confirmation

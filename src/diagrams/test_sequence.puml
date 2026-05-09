@@ -1,0 +1,46 @@
+@startuml
+title Parser Test - Sequence Diagram with alt and loop
+
+actor Student
+participant "LoginController" as Controller
+participant "AuthService" as Auth
+participant "CourseService" as CourseService
+participant "AssignmentRepository" as Repo
+participant "NotificationService" as Notify
+
+Student -> Controller: login(username, password)
+Controller -> Auth: validate(username, password)
+
+alt valid credentials
+    Auth --> Controller: user
+
+    Student -> Controller: requestAssignments(courseId)
+    Controller -> CourseService: getAssignments(courseId)
+
+    loop for each assignment
+        CourseService -> Repo: findAssignment(assignmentId)
+        Repo --> CourseService: assignment
+    end
+
+    CourseService --> Controller: assignments
+    Controller --> Student: showAssignments(assignments)
+
+    Student -> Controller: submitAssignment(assignmentId, file)
+    Controller -> CourseService: submitAssignment(assignmentId, file)
+
+    alt submission accepted
+        CourseService -> Notify: notify("Submission successful")
+        Notify --> CourseService: sent
+        CourseService --> Controller: success
+        Controller --> Student: showSuccess()
+    else submission rejected
+        CourseService --> Controller: error
+        Controller --> Student: showError()
+    end
+
+else invalid credentials
+    Auth --> Controller: null
+    Controller --> Student: showLoginError()
+end
+
+@enduml
