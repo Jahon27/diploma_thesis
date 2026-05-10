@@ -1,5 +1,6 @@
 from extractors.class_extractor import generate_class_code_from_xml
 from extractors.sequence_extractor_with_antlr_grammar import generate_sequence_code_from_xml
+from extractors.sequence_extractor_with_antlr_grammar import generate_sequence_code_from_sqd
 
 
 def main():
@@ -8,12 +9,16 @@ def main():
     output_py = "./outputs/generated_model.py"
 
     class_code = generate_class_code_from_xml(class_xml)
-    sequence_code = generate_sequence_code_from_xml(sequence_xml)
+    # sequence_code = generate_sequence_code_from_xml(sequence_xml)
+    sqd_path = "outputs/sequence_example.sqd"
 
+    generated_code = generate_sequence_code_from_sqd(sqd_path)
+
+    print(generated_code)
     full_code = (
         class_code
         + "\n\n"
-        + sequence_code
+        + generated_code
         + "\n\nif __name__ == '__main__':\n"
         + "    run_sequence()\n"
     )
