@@ -1,10 +1,25 @@
 participant student Student
 participant address Address
+participant professor Professor
 
 call student address validate
 return address student bool
+
+alt addressValid
 call student address outputAsLabel
 return address student str
+else
+self student getSeminarsTaken
+return student student int
+end
+
+loop repeatEnrollmentCheck
+self student isEligibleToEnroll
 return student student bool
+end
+
+call professor student getSeminarsTaken
+return student professor int
+
 self student purchaseParkingPass
 return student student confirmation

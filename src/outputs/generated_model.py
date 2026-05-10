@@ -43,9 +43,19 @@ class Address:
 def run_sequence():
     student = Student()
     address = Address()
+    professor = Professor()
+
+    addressValid = False
+    repeatEnrollmentCheck = False
 
     address.validate()
-    address.outputAsLabel()
+    if addressValid:
+        address.outputAsLabel()
+    else:
+        student.getSeminarsTaken()
+    while repeatEnrollmentCheck:
+        student.isEligibleToEnroll()
+    student.getSeminarsTaken()
     student.purchaseParkingPass()
 
 if __name__ == '__main__':
