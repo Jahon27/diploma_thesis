@@ -4,21 +4,19 @@ from extractors.sequence_extractor_with_antlr_grammar import generate_sequence_c
 
 
 def main():
-    class_xml = "./diagrams/uml-class-example_1.drawio.xml"
-    sequence_xml = "./diagrams/uml-sequence-example_1.drawio.xml"
-    output_py = "./outputs/generated_model.py"
+    class_xml = "./diagrams/online-shopping-class.drawio.xml"
+    sequence_xml = "./diagrams/online-shopping-sequence.drawio.xml"
+    output_py = "./outputs/online_shopping_gen_model.py"
 
     class_code = generate_class_code_from_xml(class_xml)
-    # sequence_code = generate_sequence_code_from_xml(sequence_xml)
-    sqd_path = "outputs/sequence_example.sqd"
+    sequence_code = generate_sequence_code_from_xml(sequence_xml)
 
-    generated_code = generate_sequence_code_from_sqd(sqd_path)
-
-    print(generated_code)
+    print("Generated SQD:")
+    print(sequence_code)
     full_code = (
         class_code
         + "\n\n"
-        + generated_code
+        + sequence_code
         + "\n\nif __name__ == '__main__':\n"
         + "    run_sequence()\n"
     )

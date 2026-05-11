@@ -192,8 +192,8 @@ def generate_python_code(
     return "\n".join(lines)
 
 def main():
-    input_xml = "../diagrams/uml-class-example_1.drawio.xml"
-    output_py = "../outputs/uml-class-example_1.py"
+    input_xml = "../diagrams/online-shopping-class.drawio.xml"
+    output_py = "../outputs/online_shopping_class.py"
 
     classes = extract_classes(input_xml)
     class_attributes = extract_attributes(input_xml, classes)

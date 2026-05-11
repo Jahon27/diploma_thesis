@@ -230,11 +230,118 @@ def clean_method_name(label: str) -> str:
 
     return label.strip()
 
+def is_fragment_cell(cell: ET.Element) -> bool:
+    value = clean_text(cell.get("value", "")).lower()
+    style = cell.get("style", "")
+
+    return (
+        cell.get("vertex") == "1"
+        and value in {"alt", "loop"}
+        and "shape=mxgraph.sysml.package" in style
+    )
+
+
+def extract_fragments(cells: list[ET.Element]) -> list[dict]:
+    fragments = []
+
+    for cell in cells:
+        if not is_fragment_cell(cell):
+            continue
+
+        geometry = cell.find("mxGeometry")
+        if geometry is None:
+            continue
+
+        x = float(geometry.get("x", "0"))
+        y = float(geometry.get("y", "0"))
+        width = float(geometry.get("width", "0"))
+        height = float(geometry.get("height", "0"))
+
+        fragments.append({
+            "id": cell.get("id"),
+            "type": clean_text(cell.get("value", "")).lower(),
+            "x": x,
+            "y": y,
+            "width": width,
+            "height": height,
+            "end_y": y + height,
+            "condition": None,
+            "else_condition": None,
+        })
+
+    fragments.sort(key=lambda f: f["y"])
+    return fragments
+
+
+def is_condition_text(cell: ET.Element) -> bool:
+    value = clean_text(cell.get("value", ""))
+
+    return (
+        cell.get("vertex") == "1"
+        and value.startswith("[")
+        and value.endswith("]")
+    )
+
+
+def clean_condition(value: str) -> str:
+    value = clean_text(value)
+    value = value.strip("[]").strip()
+
+    parts = value.split()
+    if not parts:
+        return "condition"
+
+    return parts[0] + "".join(part.capitalize() for part in parts[1:])
+
+
+def add_fragment_conditions(
+    fragments: list[dict],
+    cells: list[ET.Element]
+) -> None:
+    for cell in cells:
+        if not is_condition_text(cell):
+            continue
+
+        geometry = cell.find("mxGeometry")
+        if geometry is None:
+            continue
+
+        x = float(geometry.get("x", "0"))
+        y = float(geometry.get("y", "0"))
+        condition = clean_condition(cell.get("value", ""))
+
+        containing = [
+            fragment for fragment in fragments
+            if fragment["x"] <= x <= fragment["x"] + fragment["width"]
+            and fragment["y"] <= y <= fragment["end_y"]
+        ]
+
+        if not containing:
+            continue
+
+        fragment = min(containing, key=lambda f: f["width"] * f["height"])
+
+        if fragment["condition"] is None:
+            fragment["condition"] = condition
+        else:
+            fragment["else_condition"] = condition
+
+
+def message_to_sqd_line(msg: dict) -> str:
+    if msg["type"] == "return":
+        return f"return {msg['from']} {msg['to']} {clean_method_name(msg['label'])}"
+
+    if msg["is_self_call"]:
+        return f"self {msg['from']} {clean_method_name(msg['label'])}"
+
+    return f"call {msg['from']} {msg['to']} {clean_method_name(msg['label'])}"
 
 def generate_sqd(
     participants: dict[str, dict[str, str]],
-    messages: list[dict]
+    messages: list[dict],
+    fragments: list[dict] | None = None
 ) -> str:
+    fragments = fragments or []
     lines = []
 
     for participant in participants.values():
@@ -244,19 +351,65 @@ def generate_sqd(
 
     lines.append("")
 
-    for msg in messages:
-        if msg["type"] == "return":
-            lines.append(
-                f"return {msg['from']} {msg['to']} {clean_method_name(msg['label'])}"
-            )
-        elif msg["is_self_call"]:
-            lines.append(
-                f"self {msg['from']} {clean_method_name(msg['label'])}"
-            )
-        else:
-            lines.append(
-                f"call {msg['from']} {msg['to']} {clean_method_name(msg['label'])}"
-            )
+    used_message_indexes = set()
+
+    for fragment in fragments:
+        condition = fragment.get("condition") or "condition"
+
+        fragment_messages = [
+            (index, msg)
+            for index, msg in enumerate(messages)
+            if fragment["y"] <= msg["y"] <= fragment["end_y"]
+        ]
+
+        if not fragment_messages:
+            continue
+
+        if fragment["type"] == "loop":
+            lines.append(f"loop {condition}")
+
+            for index, msg in fragment_messages:
+                used_message_indexes.add(index)
+                lines.append(message_to_sqd_line(msg))
+
+            lines.append("end")
+            lines.append("")
+
+        elif fragment["type"] == "alt":
+            else_condition = fragment.get("else_condition")
+
+            lines.append(f"alt {condition}")
+
+            split_y = None
+            if else_condition:
+                # rough split: messages after 75% of fragment height go to else branch
+                split_y = fragment["y"] + fragment["height"] * 0.75
+
+            for index, msg in fragment_messages:
+                if split_y is not None and msg["y"] > split_y:
+                    continue
+
+                used_message_indexes.add(index)
+                lines.append(message_to_sqd_line(msg))
+
+            if else_condition:
+                lines.append(f"else {else_condition}")
+
+                for index, msg in fragment_messages:
+                    if msg["y"] <= split_y:
+                        continue
+
+                    used_message_indexes.add(index)
+                    lines.append(message_to_sqd_line(msg))
+
+            lines.append("end")
+            lines.append("")
+
+    for index, msg in enumerate(messages):
+        if index in used_message_indexes:
+            continue
+
+        lines.append(message_to_sqd_line(msg))
 
     return "\n".join(lines)
 
@@ -275,12 +428,14 @@ def generate_sqd_from_xml(xml_path: str) -> str:
         lifeline_geometry
     )
 
-    return generate_sqd(participants, messages)
+    fragments = extract_fragments(cells)
+    add_fragment_conditions(fragments, cells)
 
+    return generate_sqd(participants, messages, fragments)
 
 def main():
-    input_xml = "../diagrams/uml-sequence-example_1.drawio.xml"
-    output_sqd = "../outputs/sequence_example.sqd"
+    input_xml = "../diagrams/online-shopping-sequence.drawio.xml"
+    output_sqd = "../outputs/online_shopping_test.sqd"
 
     sqd_code = generate_sqd_from_xml(input_xml)
 

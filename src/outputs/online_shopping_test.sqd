@@ -1,0 +1,48 @@
+participant customer Customer
+participant cart Cart
+participant product Product
+participant inventory Inventory
+participant order Order
+participant payment Payment
+participant shipping Shipping
+participant notification Notification
+
+loop condition
+call cart product checkAvailability
+call product inventory checkStock
+return inventory product stockAvailable
+return product cart availabilityResult
+end
+
+alt paymentSuccessful
+call cart payment processPayment
+return payment cart paymentStatus
+call cart order createOrder
+call order inventory createOrder
+call inventory product updateStock
+call order shipping createShipment
+return shipping order shipmentCreated
+call order notification sendConfirmation
+self cart clearCart
+else paymentFailed
+call cart notification sendPaymentFailure
+call cart notification sendOutOfStock
+end
+
+alt eachCartItem
+call cart order createOrder
+call order inventory createOrder
+call inventory product updateStock
+call order shipping createShipment
+return shipping order shipmentCreated
+call order notification sendConfirmation
+self cart clearCart
+call cart notification sendPaymentFailure
+end
+
+loop condition
+call inventory product updateStock
+end
+
+call customer cart checkout
+self cart calculateTotal
