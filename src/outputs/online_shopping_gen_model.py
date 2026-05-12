@@ -137,32 +137,24 @@ def run_sequence():
     eachCartItem = False
     paymentSuccessful = False
 
+    cart.checkout()
+    cart.calculateTotal()
     while condition:
         product.checkAvailability()
         inventory.checkStock()
     if paymentSuccessful:
         payment.processPayment()
-        order.createOrder()
-        inventory.createOrder()
-        product.updateStock()
-        shipping.createShipment()
-        notification.sendConfirmation()
-        cart.clearCart()
+        if eachCartItem:
+            order.createOrder()
+            inventory.createOrder()
+            while condition:
+                product.updateStock()
+            shipping.createShipment()
+            notification.sendConfirmation()
+            cart.clearCart()
+            notification.sendPaymentFailure()
     else:
-        notification.sendPaymentFailure()
         notification.sendOutOfStock()
-    if eachCartItem:
-        order.createOrder()
-        inventory.createOrder()
-        product.updateStock()
-        shipping.createShipment()
-        notification.sendConfirmation()
-        cart.clearCart()
-        notification.sendPaymentFailure()
-    while condition:
-        product.updateStock()
-    cart.checkout()
-    cart.calculateTotal()
 
 if __name__ == '__main__':
     run_sequence()

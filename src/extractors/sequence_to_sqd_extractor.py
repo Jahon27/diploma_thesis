@@ -264,13 +264,52 @@ def extract_fragments(cells: list[ET.Element]) -> list[dict]:
             "y": y,
             "width": width,
             "height": height,
+            "end_x": x + width,
             "end_y": y + height,
-            "condition": None,
-            "else_condition": None,
+            "conditions": [],
+            "children": [],
+            "items": [],
+            "parent": None,
         })
 
-    fragments.sort(key=lambda f: f["y"])
     return fragments
+
+
+def contains_fragment(parent: dict, child: dict) -> bool:
+    return (
+        parent["id"] != child["id"]
+        and parent["x"] <= child["x"]
+        and parent["y"] <= child["y"]
+        and parent["end_x"] >= child["end_x"]
+        and parent["end_y"] >= child["end_y"]
+    )
+
+
+def contains_message(fragment: dict, msg: dict) -> bool:
+    return fragment["y"] <= msg["y"] <= fragment["end_y"]
+
+
+def build_fragment_tree(fragments: list[dict]) -> list[dict]:
+    for fragment in fragments:
+        containers = [
+            candidate for candidate in fragments
+            if contains_fragment(candidate, fragment)
+        ]
+
+        if containers:
+            parent = min(
+                containers,
+                key=lambda f: f["width"] * f["height"]
+            )
+            fragment["parent"] = parent["id"]
+            parent["children"].append(fragment)
+
+    root_fragments = [
+        fragment for fragment in fragments
+        if fragment["parent"] is None
+    ]
+
+    return root_fragments
 
 
 def is_condition_text(cell: ET.Element) -> bool:
@@ -308,11 +347,10 @@ def add_fragment_conditions(
 
         x = float(geometry.get("x", "0"))
         y = float(geometry.get("y", "0"))
-        condition = clean_condition(cell.get("value", ""))
 
         containing = [
             fragment for fragment in fragments
-            if fragment["x"] <= x <= fragment["x"] + fragment["width"]
+            if fragment["x"] <= x <= fragment["end_x"]
             and fragment["y"] <= y <= fragment["end_y"]
         ]
 
@@ -321,20 +359,159 @@ def add_fragment_conditions(
 
         fragment = min(containing, key=lambda f: f["width"] * f["height"])
 
-        if fragment["condition"] is None:
-            fragment["condition"] = condition
+        fragment["conditions"].append({
+            "y": y,
+            "condition": clean_condition(cell.get("value", ""))
+        })
+
+    for fragment in fragments:
+        fragment["conditions"].sort(key=lambda c: c["y"])
+
+
+def find_innermost_fragment(
+    msg: dict,
+    fragments: list[dict]
+) -> dict | None:
+    containing = [
+        fragment for fragment in fragments
+        if contains_message(fragment, msg)
+    ]
+
+    if not containing:
+        return None
+
+    return min(containing, key=lambda f: f["width"] * f["height"])
+
+
+def assign_items_to_fragments(
+    messages: list[dict],
+    fragments: list[dict]
+) -> list[dict]:
+    root_items = []
+
+    for msg in messages:
+        fragment = find_innermost_fragment(msg, fragments)
+
+        if fragment is None:
+            root_items.append({
+                "kind": "message",
+                "y": msg["y"],
+                "data": msg
+            })
         else:
-            fragment["else_condition"] = condition
+            fragment["items"].append({
+                "kind": "message",
+                "y": msg["y"],
+                "data": msg
+            })
+
+    for fragment in fragments:
+        if fragment["parent"] is None:
+            root_items.append({
+                "kind": "fragment",
+                "y": fragment["y"],
+                "data": fragment
+            })
+        else:
+            parent = next(
+                f for f in fragments
+                if f["id"] == fragment["parent"]
+            )
+            parent["items"].append({
+                "kind": "fragment",
+                "y": fragment["y"],
+                "data": fragment
+            })
+
+    for fragment in fragments:
+        fragment["items"].sort(key=lambda item: item["y"])
+
+    root_items.sort(key=lambda item: item["y"])
+    return root_items
 
 
-def message_to_sqd_line(msg: dict) -> str:
+def message_to_sqd_line(msg: dict, indent: int = 0) -> str:
+    prefix = "    " * indent
+
     if msg["type"] == "return":
-        return f"return {msg['from']} {msg['to']} {clean_method_name(msg['label'])}"
+        return f"{prefix}return {msg['from']} {msg['to']} {clean_method_name(msg['label'])}"
 
     if msg["is_self_call"]:
-        return f"self {msg['from']} {clean_method_name(msg['label'])}"
+        return f"{prefix}self {msg['from']} {clean_method_name(msg['label'])}"
 
-    return f"call {msg['from']} {msg['to']} {clean_method_name(msg['label'])}"
+    return f"{prefix}call {msg['from']} {msg['to']} {clean_method_name(msg['label'])}"
+
+
+def emit_items(items: list[dict], indent: int = 0) -> list[str]:
+    lines = []
+
+    for item in items:
+        if item["kind"] == "message":
+            lines.append(message_to_sqd_line(item["data"], indent))
+
+        elif item["kind"] == "fragment":
+            lines.extend(emit_fragment(item["data"], indent))
+
+    return lines
+
+
+def emit_fragment(fragment: dict, indent: int = 0) -> list[str]:
+    prefix = "    " * indent
+    lines = []
+
+    if fragment["type"] == "loop":
+        condition = "condition"
+
+        if fragment["conditions"]:
+            condition = fragment["conditions"][0]["condition"]
+
+        lines.append(f"{prefix}loop {condition}")
+        lines.extend(emit_items(fragment["items"], indent + 1))
+        lines.append(f"{prefix}end")
+        return lines
+
+    if fragment["type"] == "alt":
+        conditions = fragment["conditions"]
+
+        main_condition = (
+            conditions[0]["condition"]
+            if len(conditions) >= 1
+            else "condition"
+        )
+
+        else_condition = (
+            conditions[1]["condition"]
+            if len(conditions) >= 2
+            else None
+        )
+
+        split_y = (
+            conditions[1]["y"]
+            if len(conditions) >= 2
+            else None
+        )
+
+        then_items = []
+        else_items = []
+
+        for item in fragment["items"]:
+            if split_y is not None and item["y"] >= split_y:
+                else_items.append(item)
+            else:
+                then_items.append(item)
+
+        lines.append(f"{prefix}alt {main_condition}")
+        lines.extend(emit_items(then_items, indent + 1))
+
+        if else_condition:
+            lines.append(f"{prefix}else {else_condition}")
+            lines.extend(emit_items(else_items, indent + 1))
+
+        lines.append(f"{prefix}end")
+        return lines
+
+    return lines
+
 
 def generate_sqd(
     participants: dict[str, dict[str, str]],
@@ -351,65 +528,11 @@ def generate_sqd(
 
     lines.append("")
 
-    used_message_indexes = set()
+    build_fragment_tree(fragments)
 
-    for fragment in fragments:
-        condition = fragment.get("condition") or "condition"
+    root_items = assign_items_to_fragments(messages, fragments)
 
-        fragment_messages = [
-            (index, msg)
-            for index, msg in enumerate(messages)
-            if fragment["y"] <= msg["y"] <= fragment["end_y"]
-        ]
-
-        if not fragment_messages:
-            continue
-
-        if fragment["type"] == "loop":
-            lines.append(f"loop {condition}")
-
-            for index, msg in fragment_messages:
-                used_message_indexes.add(index)
-                lines.append(message_to_sqd_line(msg))
-
-            lines.append("end")
-            lines.append("")
-
-        elif fragment["type"] == "alt":
-            else_condition = fragment.get("else_condition")
-
-            lines.append(f"alt {condition}")
-
-            split_y = None
-            if else_condition:
-                # rough split: messages after 75% of fragment height go to else branch
-                split_y = fragment["y"] + fragment["height"] * 0.75
-
-            for index, msg in fragment_messages:
-                if split_y is not None and msg["y"] > split_y:
-                    continue
-
-                used_message_indexes.add(index)
-                lines.append(message_to_sqd_line(msg))
-
-            if else_condition:
-                lines.append(f"else {else_condition}")
-
-                for index, msg in fragment_messages:
-                    if msg["y"] <= split_y:
-                        continue
-
-                    used_message_indexes.add(index)
-                    lines.append(message_to_sqd_line(msg))
-
-            lines.append("end")
-            lines.append("")
-
-    for index, msg in enumerate(messages):
-        if index in used_message_indexes:
-            continue
-
-        lines.append(message_to_sqd_line(msg))
+    lines.extend(emit_items(root_items, indent=0))
 
     return "\n".join(lines)
 
