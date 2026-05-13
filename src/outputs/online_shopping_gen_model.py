@@ -137,7 +137,7 @@ def run_sequence():
     eachCartItem = False
     paymentSuccessful = False
 
-    cart.checkout()
+    customer.checkOut()
     cart.calculateTotal()
     while condition:
         product.checkAvailability()
@@ -146,7 +146,6 @@ def run_sequence():
         payment.processPayment()
         if eachCartItem:
             order.createOrder()
-            inventory.createOrder()
             while condition:
                 product.updateStock()
             shipping.createShipment()
