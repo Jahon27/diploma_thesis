@@ -1,0 +1,14 @@
+Pablo Sánchez, Ana Moreira, Lidia Fuentes, João Araújo, José Magno — Model-driven development for early aspects — Information and Software Technology, 2010.
+https://doi.org/10.1016/j.infsof.2009.09.001
+
+Yong Xia, Martin Glinz — Rigorous EBNF-based Definition for a Graphic Modeling Language — Asia-Pacific Software Engineering Conference (APSEC), 2003
+https://doi.org/10.1109/APSEC.2003.1254371
+
+Francisco Ortin, Jose Quiroga, Oscar Rodriguez-Prieto, Miguel Garcia — An empirical evaluation of Lex/Yacc and ANTLR parser generation tools — PLOS ONE, 2022.
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0264326
+
+Dimpala Salunke, Om Shinde, Akash Nipunge, Darshan Patil, Pallavi Tekade, Swapnil Nikat — Efficient Software Development with UML-Based Code Generation — IEEE 5th Global Conference for Advancement in Technology (GCAT), 2024
+https://doi.org/10.1109/GCAT62922.2024.10923930
+
+Zelong Zhao, Nan Zhang, Bin Yu, Zhenhua Duan — Generating Java code pairing with ChatGPT — Theoretical Computer Science, 2024
+https://doi.org/10.1016/j.tcs.2024.114879
