@@ -337,6 +337,9 @@ def add_fragment_conditions(
     fragments: list[dict],
     cells: list[ET.Element]
 ) -> None:
+    X_TOLERANCE = 30.0
+    Y_TOLERANCE = 25.0
+
     for cell in cells:
         if not is_condition_text(cell):
             continue
@@ -348,25 +351,37 @@ def add_fragment_conditions(
         x = float(geometry.get("x", "0"))
         y = float(geometry.get("y", "0"))
 
+        condition = clean_condition(cell.get("value", ""))
+
         containing = [
-            fragment for fragment in fragments
-            if fragment["x"] <= x <= fragment["end_x"]
-            and fragment["y"] <= y <= fragment["end_y"]
+            fragment
+            for fragment in fragments
+            if fragment["x"] - X_TOLERANCE <= x <= fragment["end_x"] + X_TOLERANCE
+            and fragment["y"] - Y_TOLERANCE <= y <= fragment["end_y"]
         ]
 
         if not containing:
+            print(
+                f"Warning: condition '{condition}' "
+                f"at ({x}, {y}) was not assigned to any fragment"
+            )
             continue
 
-        fragment = min(containing, key=lambda f: f["width"] * f["height"])
+        # Nested fragment gets priority
+        fragment = min(
+            containing,
+            key=lambda f: f["width"] * f["height"]
+        )
 
         fragment["conditions"].append({
             "y": y,
-            "condition": clean_condition(cell.get("value", ""))
+            "condition": condition
         })
 
     for fragment in fragments:
-        fragment["conditions"].sort(key=lambda c: c["y"])
-
+        fragment["conditions"].sort(
+            key=lambda c: c["y"]
+        )
 
 def find_innermost_fragment(
     msg: dict,
@@ -558,7 +573,7 @@ def generate_sqd_from_xml(xml_path: str) -> str:
 
 def main():
     input_xml = "../diagrams/online-shopping-sequence.drawio.xml"
-    output_sqd = "../outputs/online_shopping_test.sqd"
+    output_sqd = "../outputs/online_shopping_test_1.sqd"
 
     sqd_code = generate_sqd_from_xml(input_xml)
 

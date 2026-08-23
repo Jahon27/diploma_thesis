@@ -28,7 +28,7 @@ class Cart:
     def removeItem(self):
         pass
 
-    def caltucateTotal(self):
+    def calculateTotal(self):
         pass
 
     def clearCart(self):
@@ -123,7 +123,7 @@ class Notification:
         pass
 
 
-def run_sequence():
+def run_sequence(eachCartItem, allItemsAvailable, paymentSuccessful):
     customer = Customer()
     cart = Cart()
     product = Product()
@@ -133,27 +133,22 @@ def run_sequence():
     shipping = Shipping()
     notification = Notification()
 
-    condition = False
-    eachCartItem = False
-    paymentSuccessful = False
-
     customer.checkOut()
     cart.calculateTotal()
-    while condition:
+    while eachCartItem:
         product.checkAvailability()
         inventory.checkStock()
-    if paymentSuccessful:
+    if allItemsAvailable:
         payment.processPayment()
-        if eachCartItem:
+        if paymentSuccessful:
             order.createOrder()
-            while condition:
+            inventory.reserveProduct()
+            while eachCartItem:
                 product.updateStock()
             shipping.createShipment()
             notification.sendConfirmation()
             cart.clearCart()
+        else:
             notification.sendPaymentFailure()
     else:
         notification.sendOutOfStock()
-
-if __name__ == '__main__':
-    run_sequence()

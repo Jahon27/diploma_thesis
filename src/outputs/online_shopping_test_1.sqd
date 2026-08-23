@@ -7,29 +7,30 @@ participant payment Payment
 participant shipping Shipping
 participant notification Notification
 
-call customer cart checkout
-self cart calculateTotal
-loop condition
+self customer checkOut
+call customer cart calculateTotal
+loop eachCartItem
     call cart product checkAvailability
     call product inventory checkStock
     return inventory product stockAvailable
     return product cart availabilityResult
 end
-alt paymentSuccessful
+alt allItemsAvailable
     call cart payment processPayment
     return payment cart paymentStatus
-    alt eachCartItem
+    alt paymentSuccessful
         call cart order createOrder
-        call order inventory createOrder
-        loop condition
+        call order inventory reserveProduct
+        loop eachCartItem
             call inventory product updateStock
         end
         call order shipping createShipment
         return shipping order shipmentCreated
         call order notification sendConfirmation
         self cart clearCart
+    else paymentFailed
         call cart notification sendPaymentFailure
     end
-else paymentFailed
+else outOfStock
     call cart notification sendOutOfStock
 end
