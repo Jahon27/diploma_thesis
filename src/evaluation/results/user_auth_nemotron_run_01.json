@@ -1,0 +1,112 @@
+{
+  "syntax_valid": true,
+  "classes": {
+    "reference_count": 4,
+    "candidate_count": 4,
+    "correct_count": 4,
+    "precision": 1.0,
+    "recall": 1.0,
+    "missing": [],
+    "extra": []
+  },
+  "methods": {
+    "reference_count": 8,
+    "candidate_count": 9,
+    "correct_count": 1,
+    "precision": 0.1111,
+    "recall": 0.125,
+    "missing": [
+      "AuthenticationService.validateCredentials",
+      "Session.__init__",
+      "Session.createSession",
+      "User.enterCredentials",
+      "User.showDashboard",
+      "User.showLoginError",
+      "UserRepository.findUser"
+    ],
+    "extra": [
+      "AuthenticationService.__init__",
+      "AuthenticationService.run",
+      "AuthenticationService.show_dashboard",
+      "AuthenticationService.validate_credentials",
+      "Session.create_session",
+      "User.enter_credentials",
+      "User.show_dashboard",
+      "UserRepository.find_user"
+    ]
+  },
+  "attributes": {
+    "reference_count": 4,
+    "candidate_count": 5,
+    "exact_correct_count": 2,
+    "renamed_count": 1,
+    "precision": 0.6,
+    "recall": 0.75,
+    "exact_name_recall": 0.5,
+    "renamed": [
+      {
+        "reference": "User.userId",
+        "candidate": "User.user_id"
+      }
+    ],
+    "missing": [
+      "Session.sessionId"
+    ],
+    "invented": [
+      "AuthenticationService.repo",
+      "AuthenticationService.session"
+    ]
+  },
+  "calls": {
+    "reference_count": 5,
+    "candidate_count": 0,
+    "correct_count": 0,
+    "precision": 1.0,
+    "recall": 0.0,
+    "missing": [
+      "authenticationservice.validateCredentials",
+      "session.createSession",
+      "user.enterCredentials",
+      "user.showDashboard",
+      "userrepository.findUser"
+    ],
+    "extra": [],
+    "exact_order_match": false,
+    "reference_order": [
+      "user.enterCredentials",
+      "authenticationservice.validateCredentials",
+      "userrepository.findUser",
+      "session.createSession",
+      "user.showDashboard"
+    ],
+    "candidate_order": []
+  },
+  "control_flow": {
+    "exact_match": true,
+    "reference": {
+      "if": 0,
+      "while": 0,
+      "for": 0
+    },
+    "candidate": {
+      "if": 0,
+      "while": 0,
+      "for": 0
+    },
+    "difference": {
+      "if": 0,
+      "while": 0,
+      "for": 0
+    }
+  },
+  "reference_conditions": [],
+  "candidate_conditions": [],
+  "uml_fidelity": {
+    "class_f1": 1.0,
+    "method_f1": 0.1176,
+    "attribute_f1": 0.6667,
+    "call_f1": 0.0,
+    "control_flow_score": 1.0,
+    "overall_uml_fidelity": 0.5569
+  }
+}

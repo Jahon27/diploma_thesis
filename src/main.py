@@ -2,9 +2,9 @@ from extractors.class_extractor import generate_class_code_from_xml
 from extractors.sequence_extractor_with_antlr_grammar import generate_sequence_code_from_xml
 
 def main():
-    class_xml = "./diagrams/online-shopping-class.drawio.xml"
-    sequence_xml = "./diagrams/online-shopping-sequence.drawio.xml"
-    output_py = "./outputs/online_shopping_gen_model_1.py"
+    class_xml = "./diagrams/user-auth-class.drawio.xml"
+    sequence_xml = "./diagrams/user-auth-sequence.drawio.xml"
+    output_py = "./outputs/user_auth_gen_model_1.py"
 
     class_code = generate_class_code_from_xml(class_xml)
     sequence_code = generate_sequence_code_from_xml(sequence_xml)

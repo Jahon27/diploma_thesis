@@ -1,0 +1,85 @@
+{
+  "syntax_valid": true,
+  "classes": {
+    "reference_count": 4,
+    "candidate_count": 4,
+    "correct_count": 4,
+    "precision": 1.0,
+    "recall": 1.0,
+    "missing": [],
+    "extra": []
+  },
+  "methods": {
+    "reference_count": 8,
+    "candidate_count": 8,
+    "correct_count": 8,
+    "precision": 1.0,
+    "recall": 1.0,
+    "missing": [],
+    "extra": []
+  },
+  "attributes": {
+    "reference_count": 4,
+    "candidate_count": 4,
+    "exact_correct_count": 4,
+    "renamed_count": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "exact_name_recall": 1.0,
+    "renamed": [],
+    "missing": [],
+    "invented": []
+  },
+  "calls": {
+    "reference_count": 5,
+    "candidate_count": 5,
+    "correct_count": 5,
+    "precision": 1.0,
+    "recall": 1.0,
+    "missing": [],
+    "extra": [],
+    "exact_order_match": true,
+    "reference_order": [
+      "user.enterCredentials",
+      "authenticationservice.validateCredentials",
+      "userrepository.findUser",
+      "session.createSession",
+      "user.showDashboard"
+    ],
+    "candidate_order": [
+      "user.enterCredentials",
+      "authenticationservice.validateCredentials",
+      "userrepository.findUser",
+      "session.createSession",
+      "user.showDashboard"
+    ]
+  },
+  "control_flow": {
+    "exact_match": true,
+    "reference": {
+      "if": 0,
+      "while": 0,
+      "for": 0
+    },
+    "candidate": {
+      "if": 0,
+      "while": 0,
+      "for": 0
+    },
+    "difference": {
+      "if": 0,
+      "while": 0,
+      "for": 0
+    }
+  },
+  "reference_conditions": [],
+  "candidate_conditions": [],
+  "uml_fidelity": {
+    "class_f1": 1.0,
+    "method_f1": 1.0,
+    "attribute_f1": 1.0,
+    "call_f1": 1.0,
+    "control_flow_score": 1.0,
+    "overall_uml_fidelity": 1.0
+  }
+}

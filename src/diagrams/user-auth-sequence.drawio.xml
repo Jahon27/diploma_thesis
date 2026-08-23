@@ -1,0 +1,91 @@
+<mxfile host="app.diagrams.net" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36">
+  <diagram id="2YBvvXClWsGukQMizWep" name="Page-1">
+    <mxGraphModel dx="1058" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uESDnB-zta4rcEmV2_OK-1" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;" value="User" vertex="1">
+          <mxGeometry height="485" width="20" x="60" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="uESDnB-zta4rcEmV2_OK-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="AuthenticationService" vertex="1">
+          <mxGeometry height="485" width="120" x="140" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="uESDnB-zta4rcEmV2_OK-3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="UserRepository" vertex="1">
+          <mxGeometry height="485" width="100" x="280" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="uESDnB-zta4rcEmV2_OK-4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="Session" vertex="1">
+          <mxGeometry height="485" width="95" x="400" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="uESDnB-zta4rcEmV2_OK-6" edge="1" parent="1" source="uESDnB-zta4rcEmV2_OK-1" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=orthogonalEdgeStyle;elbow=vertical;rounded=0;innerLoopWaypoints=1;" target="uESDnB-zta4rcEmV2_OK-1" value="enterCredentials()">
+          <mxGeometry relative="1" x="-0.3752" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="140.35000000000002" y="160" />
+              <mxPoint x="140.35000000000002" y="180" />
+            </Array>
+            <mxPoint x="70" y="160" as="sourcePoint" />
+            <mxPoint x="70" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uESDnB-zta4rcEmV2_OK-7" edge="1" parent="1" source="uESDnB-zta4rcEmV2_OK-1" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" target="uESDnB-zta4rcEmV2_OK-2" value="validateCredentials()">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="130" y="240" />
+            </Array>
+            <mxPoint x="110" y="250" as="sourcePoint" />
+            <mxPoint x="280" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uESDnB-zta4rcEmV2_OK-8" edge="1" parent="1" source="uESDnB-zta4rcEmV2_OK-2" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" target="uESDnB-zta4rcEmV2_OK-3" value="findUser()">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="280" />
+            </Array>
+            <mxPoint x="200" y="290" as="sourcePoint" />
+            <mxPoint x="331" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uESDnB-zta4rcEmV2_OK-9" edge="1" parent="1" source="uESDnB-zta4rcEmV2_OK-3" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;elbow=vertical;rounded=0;" target="uESDnB-zta4rcEmV2_OK-2" value="userFound">
+          <mxGeometry relative="1" x="-0.0287" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="280" y="340" />
+            </Array>
+            <mxPoint x="379.86956521739114" y="350" as="sourcePoint" />
+            <mxPoint x="260" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uESDnB-zta4rcEmV2_OK-10" edge="1" parent="1" source="uESDnB-zta4rcEmV2_OK-2" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" target="uESDnB-zta4rcEmV2_OK-4" value="createSession()">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="321" y="400" />
+            </Array>
+            <mxPoint x="250" y="390" as="sourcePoint" />
+            <mxPoint x="381" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uESDnB-zta4rcEmV2_OK-12" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;elbow=vertical;rounded=0;" value="loginSuccessful">
+          <mxGeometry relative="1" x="-0.0287" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="151" y="440" />
+            </Array>
+            <mxPoint x="199.5" y="440" as="sourcePoint" />
+            <mxPoint x="69.32352941176464" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uESDnB-zta4rcEmV2_OK-13" edge="1" parent="1" source="uESDnB-zta4rcEmV2_OK-1" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=orthogonalEdgeStyle;elbow=vertical;rounded=0;innerLoopWaypoints=1;" target="uESDnB-zta4rcEmV2_OK-1" value="showDashboard()">
+          <mxGeometry relative="1" x="-0.3752" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="140" y="490" />
+              <mxPoint x="140" y="510" />
+            </Array>
+            <mxPoint x="68.64999999999998" y="490" as="sourcePoint" />
+            <mxPoint x="68.64999999999998" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -5,34 +5,48 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import time
 
+from openai import RateLimitError, APIError, APITimeoutError
 
-def call_model(prompt: str, max_attempts: int = 3):
+
+def call_model(prompt: str, max_attempts: int = 3) -> str:
     for attempt in range(1, max_attempts + 1):
         print(f"Attempt {attempt}/{max_attempts}...")
 
-        response = client.chat.completions.create(
-            model="google/gemma-4-26b-a4b-it:free",
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ],
-            temperature=0,
-        )
+        try:
+            response = client.chat.completions.create(
+                model="nvidia/nemotron-3-nano-30b-a3b:free",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                temperature=0,
+            )
 
-        if response.choices:
-            content = response.choices[0].message.content
+            if response.choices:
+                content = response.choices[0].message.content
 
-            if content:
-                return content
+                if content:
+                    print("Response received.")
+                    return content
 
-        error = getattr(response, "error", None)
-        print("Request failed:", error)
+            error = getattr(response, "error", None)
+            print("Empty response:", error)
+
+        except RateLimitError as e:
+            print(f"Rate limit error: {e}")
+
+        except APITimeoutError as e:
+            print(f"Timeout error: {e}")
+
+        except APIError as e:
+            print(f"API error: {e}")
 
         if attempt < max_attempts:
-            print("Waiting 5 seconds before retry...")
-            time.sleep(5)
+            wait_seconds = 15 * attempt
+            print(f"Waiting {wait_seconds} seconds before retry...")
+            time.sleep(wait_seconds)
 
     raise RuntimeError(
         f"Model failed after {max_attempts} attempts."
@@ -130,7 +144,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 if __name__ == "__main__":
     generate_from_files(
-        BASE_DIR / "diagrams" / "online-shopping-class.drawio.xml",
-        BASE_DIR / "diagrams" / "online-shopping-sequence.drawio.xml",
-        BASE_DIR / "outputs" / "ai_generated_output" / "gemma_class_sequence.py"
+        BASE_DIR / "diagrams" / "user-auth-class.drawio.xml",
+        BASE_DIR / "diagrams" / "user-auth-sequence.drawio.xml",
+        BASE_DIR / "outputs" / "ai_generated_output" / "nemotron_user_auth_class_sequence.py"
     )

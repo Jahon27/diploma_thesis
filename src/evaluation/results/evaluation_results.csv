@@ -1,0 +1,5 @@
+model,test_case,run,syntax_valid,class_f1,method_f1,attribute_f1,call_f1,control_flow_score,overall_uml_fidelity,invented_attributes,renamed_attributes,missing_calls,extra_calls,call_precision,call_recall
+parser,online_shopping,1,True,1.0,1.0,1.0,1.0,1.0,1.0,0,0,0,0,1.0,1.0
+nemotron,online_shopping,1,True,1.0,1.0,0.9434,0.5926,0.0,0.7072,3,12,5,6,0.5714,0.6154
+parser,user_auth,1,True,1.0,1.0,1.0,1.0,1.0,1.0,0,0,0,0,1.0,1.0
+nemotron,user_auth,1,True,1.0,0.1176,0.6667,0.0,1.0,0.5569,2,1,5,0,1.0,0.0

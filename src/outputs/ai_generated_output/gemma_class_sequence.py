@@ -132,14 +132,15 @@ class Notification:
         pass
 
 
-def run_checkout_process(customer: Customer, cart: Cart, products: list[Product], inventory: Inventory, payment_system: Payment, shipping_system: Shipping, notification_system: Notification):
+def run_checkout_process(customer: Customer, cart: Cart, products: list[Product], inventory: Inventory,
+                         payment_system: Payment, shipping_system: Shipping, notification_system: Notification):
     # Sequence Diagram Logic
     customer.checkOut()
-    
+
     # Loop: each cart item
     for item in cart.items:
         cart.caltucateTotal()
-        # Note: The sequence diagram shows Product.checkAvailability() being called 
+        # Note: The sequence diagram shows Product.checkAvailability() being called
         # in relation to cart items, though the exact sender/receiver is implied.
         # We assume the system checks availability for the product in the item.
         for product in products:
@@ -147,23 +148,23 @@ def run_checkout_process(customer: Customer, cart: Cart, products: list[Product]
                 if inventory.checkStock():
                     # [all items available]
                     payment_status = payment_system.processPayment()
-                    
+
                     if payment_status == "success":
                         # [payment successful]
                         order = Order(1, "2023-10-27", "confirmed", cart.totalAmount)
                         order.createOrder()
                         order.confirmOrder()
-                        
+
                         # Update stock for each cart item
                         for product in products:
                             product.updateStock()
                             inventory.updateInventory()
-                        
+
                         shipping_system.createShipment()
-                        shipment_created = True # Mock return
-                        
+                        shipment_created = True  # Mock return
+
                         if shipment_created:
-                            order.createOrder() # Sequence diagram shows createOrder again
+                            order.createOrder()  # Sequence diagram shows createOrder again
                             notification_system.sendConfirmation()
                             cart.clearCart()
                     else:
@@ -173,13 +174,13 @@ def run_checkout_process(customer: Customer, cart: Cart, products: list[Product]
                     # [out of stock]
                     notification_system.sendOutOfStock()
             else:
-                # Inconsistency: Sequence diagram implies a flow for availability 
-                # but doesn't explicitly define the 'else' for checkAvailability 
+                # Inconsistency: Sequence diagram implies a flow for availability
+                # but doesn't explicitly define the 'else' for checkAvailability
                 # other than the 'out of stock' notification.
                 pass
-        
+
         # If loop finishes without returning, it implies the items were processed.
         # The sequence diagram structure is complex; this is a simplified mapping.
 
-# Note: The sequence diagram contains nested 'alt' and 'loop' fragments 
+# Note: The sequence diagram contains nested 'alt' and 'loop' fragments
 # that are interpreted here to represent the logical flow of a checkout transaction.
