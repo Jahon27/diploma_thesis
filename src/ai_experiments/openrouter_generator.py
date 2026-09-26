@@ -7,14 +7,13 @@ import time
 
 from openai import RateLimitError, APIError, APITimeoutError
 
-
 def call_model(prompt: str, max_attempts: int = 3) -> str:
     for attempt in range(1, max_attempts + 1):
         print(f"Attempt {attempt}/{max_attempts}...")
 
         try:
             response = client.chat.completions.create(
-                model="nvidia/nemotron-3-nano-30b-a3b:free",
+                model="nvidia/nemotron-3.5-lightning:free",
                 messages=[
                     {
                         "role": "user",
@@ -104,7 +103,7 @@ SEQUENCE DIAGRAM XML:
 {sequence_xml}
 """
 
-    print("Sending request to GEMMA...")
+    print("Sending request to LLM Model...")
 
     return call_model(prompt)
 
@@ -145,6 +144,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if __name__ == "__main__":
     generate_from_files(
         BASE_DIR / "diagrams" / "user-auth-class.drawio.xml",
-        BASE_DIR / "diagrams" / "user-auth-sequence.drawio.xml",
-        BASE_DIR / "outputs" / "ai_generated_output" / "nemotron_user_auth_class_sequence.py"
+        BASE_DIR / "diagrams" / "tc3_sequence.drawio.xml",
+        BASE_DIR / "outputs" / "ai_generated_output" / "nemotron_testcase3_class_sequence.py"
     )
