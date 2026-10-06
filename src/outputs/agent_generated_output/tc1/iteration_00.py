@@ -1,4 +1,3 @@
-```python
 class Customer:
     def __init__(self, customerId, name, email, address):
         self.customerId = customerId
@@ -166,4 +165,3 @@ def sequence(customer, cart, product, inventory, order, payment, shipping, notif
     
     # else outOfStock
     cart.notification.sendOutOfStock()
-```
