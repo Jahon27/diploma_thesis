@@ -1,8 +1,13 @@
+from pathlib import Path
 from typing import TypedDict
 
 class AgentState(TypedDict):
-    class_xml: str
-    sequence_xml: str
+    class_model: str
+    sequence_model: str
+
+    reference_path: Path
+    output_dir: Path
+    output_path: Path
 
     generated_code: str
     evaluation: dict

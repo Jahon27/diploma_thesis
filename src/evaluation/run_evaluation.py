@@ -152,27 +152,27 @@ def main():
     reference = (
         BASE_DIR
         / "reference"
-        / "user_auth_reference.py"
+        / "testcase4.py"
     )
 
     parser_output = (
         BASE_DIR
         / "outputs"
-        / "user_auth_gen_model_1.py"
+        / "testcase4.py"
     )
 
     nemotron_output = (
         BASE_DIR
         / "outputs"
         / "ai_generated_output"
-        / "nemotron_user_auth_class_sequence.py"
+        / "gemini_testcase4_class_sequence.py"
     )
 
     print("\n=== PARSER ===\n")
 
     evaluate_candidate(
         model_name="parser",
-        test_case="user_auth",
+        test_case="testcase4",
         run=1,
         reference_path=reference,
         candidate_path=parser_output
@@ -181,8 +181,8 @@ def main():
     print("\n=== NEMOTRON ===\n")
 
     evaluate_candidate(
-        model_name="nemotron",
-        test_case="user_auth",
+        model_name="gemini",
+        test_case="testcase4",
         run=1,
         reference_path=reference,
         candidate_path=nemotron_output

@@ -83,7 +83,6 @@ def extract_attributes(tree: ast.AST) -> dict[str, set[str]]:
 
     return result
 
-
 def find_run_function(tree: ast.AST) -> ast.FunctionDef | None:
     preferred_names = {
         "run_sequence",
@@ -92,15 +91,23 @@ def find_run_function(tree: ast.AST) -> ast.FunctionDef | None:
         "main",
     }
 
-    for node in tree.body:
-        if (
-            isinstance(node, ast.FunctionDef)
-            and node.name in preferred_names
-        ):
-            return node
+    top_level_functions = [
+        node
+        for node in tree.body
+        if isinstance(node, ast.FunctionDef)
+    ]
+
+    # First try conventional sequence-function names.
+    for function in top_level_functions:
+        if function.name in preferred_names:
+            return function
+
+    # If there is exactly one top-level function,
+    # treat it as the sequence implementation.
+    if len(top_level_functions) == 1:
+        return top_level_functions[0]
 
     return None
-
 
 def receiver_to_string(node: ast.AST) -> str:
     if isinstance(node, ast.Name):

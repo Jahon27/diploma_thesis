@@ -4,8 +4,8 @@ from openai import OpenAI
 def repair_code(
     client: OpenAI,
     model: str,
-    class_xml: str,
-    sequence_xml: str,
+    class_model: str,
+    sequence_model: str,
     generated_code: str,
     feedback: str,
 ) -> str:
@@ -36,19 +36,19 @@ Rules:
 - Do not invent classes, methods or attributes.
 - Do not invent method calls.
 - Preserve the sequence diagram call order.
-- Preserve ALT, LOOP, OPT and PAR semantics.
+- Preserve LOOP and ALT semantics.
 - Correct every issue reported by the evaluator.
 - Return only valid Python code.
 - Do not use Markdown fences.
 - Do not explain your answer.
 
-CLASS DIAGRAM XML:
+CLASS MODEL:
 
-{class_xml}
+{class_model}
 
-SEQUENCE DIAGRAM XML:
+SEQUENCE MODEL (SQD):
 
-{sequence_xml}
+{sequence_model}
 
 PREVIOUSLY GENERATED CODE:
 
@@ -75,4 +75,11 @@ EVALUATOR FEEDBACK:
             f"Repair model returned no choices: {response}"
         )
 
-    return response.choices[0].message.content
+    content = response.choices[0].message.content
+
+    if not content:
+        raise RuntimeError(
+            "Repair model returned an empty response."
+        )
+
+    return content

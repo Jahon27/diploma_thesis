@@ -1,0 +1,91 @@
+{
+  "syntax_valid": true,
+  "classes": {
+    "reference_count": 5,
+    "candidate_count": 5,
+    "correct_count": 5,
+    "precision": 1.0,
+    "recall": 1.0,
+    "missing": [],
+    "extra": []
+  },
+  "methods": {
+    "reference_count": 11,
+    "candidate_count": 11,
+    "correct_count": 11,
+    "precision": 1.0,
+    "recall": 1.0,
+    "missing": [],
+    "extra": []
+  },
+  "attributes": {
+    "reference_count": 7,
+    "candidate_count": 7,
+    "exact_correct_count": 7,
+    "renamed_count": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "exact_name_recall": 1.0,
+    "renamed": [],
+    "missing": [],
+    "invented": []
+  },
+  "calls": {
+    "reference_count": 6,
+    "candidate_count": 6,
+    "correct_count": 6,
+    "precision": 1.0,
+    "recall": 1.0,
+    "missing": [],
+    "extra": [],
+    "exact_order_match": true,
+    "reference_order": [
+      "order.createOrder",
+      "orderitem.processItem",
+      "inventory.reserveProduct",
+      "product.updateStock",
+      "order.confirmOrder",
+      "notification.sendConfirmation"
+    ],
+    "candidate_order": [
+      "order.createOrder",
+      "orderitem.processItem",
+      "inventory.reserveProduct",
+      "product.updateStock",
+      "order.confirmOrder",
+      "notification.sendConfirmation"
+    ]
+  },
+  "control_flow": {
+    "exact_match": true,
+    "reference": {
+      "if": 0,
+      "while": 1,
+      "for": 0
+    },
+    "candidate": {
+      "if": 0,
+      "while": 1,
+      "for": 0
+    },
+    "difference": {
+      "while": 0,
+      "for": 0,
+      "if": 0
+    }
+  },
+  "reference_conditions": [
+    "while eachOrderItem"
+  ],
+  "candidate_conditions": [
+    "while eachOrderItem"
+  ],
+  "uml_fidelity": {
+    "class_f1": 1.0,
+    "method_f1": 1.0,
+    "attribute_f1": 1.0,
+    "call_f1": 1.0,
+    "control_flow_score": 1.0,
+    "overall_uml_fidelity": 1.0
+  }
+}

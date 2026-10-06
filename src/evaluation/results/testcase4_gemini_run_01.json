@@ -1,0 +1,126 @@
+{
+  "syntax_valid": true,
+  "classes": {
+    "reference_count": 5,
+    "candidate_count": 5,
+    "correct_count": 5,
+    "precision": 1.0,
+    "recall": 1.0,
+    "missing": [],
+    "extra": []
+  },
+  "methods": {
+    "reference_count": 11,
+    "candidate_count": 14,
+    "correct_count": 11,
+    "precision": 0.7857,
+    "recall": 1.0,
+    "missing": [],
+    "extra": [
+      "Inventory.updateStock",
+      "Order.sendConfirmation",
+      "OrderItem.reserveProduct"
+    ]
+  },
+  "attributes": {
+    "reference_count": 7,
+    "candidate_count": 10,
+    "exact_correct_count": 0,
+    "renamed_count": 7,
+    "precision": 0.7,
+    "recall": 1.0,
+    "exact_name_recall": 0.0,
+    "renamed": [
+      {
+        "reference": "OrderItem.quantity",
+        "candidate": "OrderItem._quantity"
+      },
+      {
+        "reference": "Inventory.inventoryId",
+        "candidate": "Inventory._inventoryId"
+      },
+      {
+        "reference": "Order.orderId",
+        "candidate": "Order._orderId"
+      },
+      {
+        "reference": "Order.totalAmount",
+        "candidate": "Order._totalAmount"
+      },
+      {
+        "reference": "Product.stockQuantity",
+        "candidate": "Product._stockQuantity"
+      },
+      {
+        "reference": "Product.productId",
+        "candidate": "Product._productId"
+      },
+      {
+        "reference": "Notification.message",
+        "candidate": "Notification._message"
+      }
+    ],
+    "missing": [],
+    "invented": [
+      "Inventory._product",
+      "Order._items",
+      "OrderItem._product"
+    ]
+  },
+  "calls": {
+    "reference_count": 6,
+    "candidate_count": 0,
+    "correct_count": 0,
+    "precision": 1.0,
+    "recall": 0.0,
+    "missing": [
+      "inventory.reserveProduct",
+      "notification.sendConfirmation",
+      "order.confirmOrder",
+      "order.createOrder",
+      "orderitem.processItem",
+      "product.updateStock"
+    ],
+    "extra": [],
+    "exact_order_match": false,
+    "reference_order": [
+      "order.createOrder",
+      "orderitem.processItem",
+      "inventory.reserveProduct",
+      "product.updateStock",
+      "order.confirmOrder",
+      "notification.sendConfirmation"
+    ],
+    "candidate_order": []
+  },
+  "control_flow": {
+    "exact_match": false,
+    "reference": {
+      "if": 0,
+      "while": 1,
+      "for": 0
+    },
+    "candidate": {
+      "if": 0,
+      "while": 0,
+      "for": 0
+    },
+    "difference": {
+      "while": -1,
+      "for": 0,
+      "if": 0
+    }
+  },
+  "reference_conditions": [
+    "while eachOrderItem"
+  ],
+  "candidate_conditions": [],
+  "uml_fidelity": {
+    "class_f1": 1.0,
+    "method_f1": 0.88,
+    "attribute_f1": 0.8235,
+    "call_f1": 0.0,
+    "control_flow_score": 0.0,
+    "overall_uml_fidelity": 0.5407
+  }
+}

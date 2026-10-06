@@ -13,7 +13,7 @@ def call_model(prompt: str, max_attempts: int = 3) -> str:
 
         try:
             response = client.chat.completions.create(
-                model="nvidia/nemotron-3.5-lightning:free",
+                model="nvidia/nemotron-3-super-120b-a12b:free",
                 messages=[
                     {
                         "role": "user",
@@ -143,7 +143,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 if __name__ == "__main__":
     generate_from_files(
-        BASE_DIR / "diagrams" / "user-auth-class.drawio.xml",
-        BASE_DIR / "diagrams" / "tc3_sequence.drawio.xml",
-        BASE_DIR / "outputs" / "ai_generated_output" / "nemotron_testcase3_class_sequence.py"
+        BASE_DIR / "diagrams" / "tc5-class.drawio.xml",
+        BASE_DIR / "diagrams" / "tc5-sequence.drawio.xml",
+        BASE_DIR / "outputs" / "ai_generated_output" / "gemini_testcase5_class_sequence.py"
     )

@@ -1,128 +1,92 @@
-import os
 from pathlib import Path
 
-from dotenv import load_dotenv
-from openai import OpenAI
-
-from evaluation.evaluator import evaluate
-from agent.feedback_builder import build_feedback
-from agent.repair_generator import repair_code
-
-
-load_dotenv()
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-MODEL = "nvidia/nemotron-3.5-lightning:free"
-
-client = OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=os.environ["OPENROUTER_API_KEY"],
+from agent.agent_graph import agent_graph
+from agent.uml_context_builder import (
+    build_class_model,
+    build_sequence_model,
 )
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 def run_agent(
     class_xml_path: Path,
     sequence_xml_path: Path,
     reference_path: Path,
-    original_output_path: Path,
     output_dir: Path,
+    max_iterations: int = 3,
 ):
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    class_xml = class_xml_path.read_text(encoding="utf-8")
-    sequence_xml = sequence_xml_path.read_text(encoding="utf-8")
+    class_model = build_class_model(class_xml_path)
+    sequence_model = build_sequence_model(sequence_xml_path)
 
-    generated_code = original_output_path.read_text(
-        encoding="utf-8"
-    )
+    initial_state = {
+        "class_model": class_model,
+        "sequence_model": sequence_model,
 
-    # -------------------------
-    # ITERATION 0
-    # -------------------------
+        "reference_path": reference_path,
+        "output_dir": output_dir,
+        "output_path": output_dir / "iteration_00.py",
 
-    evaluation_before = evaluate(
-        reference_path,
-        original_output_path
-    )
+        "generated_code": "",
 
-    print("\n=== BEFORE REPAIR ===")
+        "evaluation": {},
+        "feedback": "",
+
+        "iteration": 0,
+        "max_iterations": max_iterations,
+    }
+
+    print("\n=== STARTING AGENT ===")
+
+    final_state = agent_graph.invoke(initial_state)
+
+    print("\n=== AGENT FINISHED ===")
+
     print(
-        "UML fidelity:",
-        evaluation_before["uml_fidelity"]["overall_uml_fidelity"]
-    )
-
-    feedback = build_feedback(evaluation_before)
-
-    print("\n=== FEEDBACK ===\n")
-    print(feedback)
-
-    # -------------------------
-    # REPAIR
-    # -------------------------
-
-    print("\nSending repair request to LLM...")
-
-    repaired_code = repair_code(
-        client=client,
-        model=MODEL,
-        class_xml=class_xml,
-        sequence_xml=sequence_xml,
-        generated_code=generated_code,
-        feedback=feedback,
-    )
-
-    repaired_path = output_dir / "iteration_01.py"
-
-    repaired_path.write_text(
-        repaired_code,
-        encoding="utf-8"
-    )
-
-    # -------------------------
-    # EVALUATE AGAIN
-    # -------------------------
-
-    evaluation_after = evaluate(
-        reference_path,
-        repaired_path
-    )
-
-    print("\n=== AFTER REPAIR ===")
-    print(
-        "UML fidelity:",
-        evaluation_after["uml_fidelity"]["overall_uml_fidelity"]
+        "Iterations:",
+        final_state["iteration"]
     )
 
     print(
-        "\nImprovement:",
-        round(
-            evaluation_after["uml_fidelity"]["overall_uml_fidelity"]
-            - evaluation_before["uml_fidelity"]["overall_uml_fidelity"],
-            4
-        )
+        "Final UML fidelity:",
+        final_state["evaluation"]
+        ["uml_fidelity"]
+        ["overall_uml_fidelity"]
+    )
+
+    print(
+        "Final output:",
+        final_state["output_path"]
     )
 
 
 if __name__ == "__main__":
     run_agent(
-        class_xml_path=BASE_DIR / "diagrams" / "online-shopping-class.drawio.xml",
-
-        sequence_xml_path=BASE_DIR / "diagrams" / "online-shopping-sequence.drawio.xml",
-
-        reference_path=BASE_DIR / "reference" / "online_shopping_reference.py",
-
-        original_output_path=(
+        class_xml_path=(
             BASE_DIR
-            / "outputs"
-            / "ai_generated_output"
-            / "ai_online_shopping.py"
+            / "diagrams"
+            / "tc4-class.drawio.xml"
+        ),
+
+        sequence_xml_path=(
+            BASE_DIR
+            / "diagrams"
+            / "tc4-sequence.drawio.xml"
+        ),
+
+        reference_path=(
+            BASE_DIR
+            / "reference"
+            / "testcase4.py"
         ),
 
         output_dir=(
             BASE_DIR
             / "outputs"
             / "agent_generated_output"
-            / "tc1"
+            / "tc4"
         ),
+
+        max_iterations=3,
     )
