@@ -13,12 +13,13 @@ from agent.feedback_builder import build_feedback
 
 load_dotenv()
 
-MODEL = "qwen/qwen3-coder-30b-a3b-instruct"
+GENERATOR_MODEL = "qwen/qwen3-coder-30b-a3b-instruct"
+REPAIR_MODEL = "deepseek/deepseek-chat"
 
 client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ["OPENROUTER_API_KEY"],)
 
-generator_agent = GeneratorAgent(client, MODEL)
-repair_agent = RepairAgent(client, MODEL)
+generator_agent = GeneratorAgent(client, GENERATOR_MODEL)
+repair_agent = RepairAgent(client, REPAIR_MODEL)
 
 def evaluate_node(state: AgentState) -> dict:
     evaluation = evaluate(state["reference_path"], state["output_path"],)

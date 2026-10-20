@@ -143,29 +143,28 @@ def run_sequence():
 
     customer.checkOut()
     cart.calculateTotal()
-    # Simulating loop over eachCartItem
-    # Assuming we have a list of cart items
-    # For simplicity, we'll assume one item
-    eachCartItem = [CartItem(1, 10.0)]
+    eachCartItem = []
     for item in eachCartItem:
         product.checkAvailability()
         product.inventory.checkStock()
         stockAvailable = inventory.product.checkStock()
-        availabilityResult = product.cart.checkAvailability()
-        if stockAvailable:
-            cart.payment.processPayment()
-            paymentStatus = cart.payment.processPayment()
-            if paymentStatus:
-                cart.order.createOrder()
-                order.inventory.reserveProduct()
-                # Simulating loop over eachCartItem again
-                for item in eachCartItem:
-                    inventory.product.updateStock()
-                order.shipping.createShipment()
-                shipmentCreated = order.shipping.createShipment()
-                order.notification.sendConfirmation()
-                cart.clearCart()
-            else:
-                cart.notification.sendPaymentFailure()
+        product.availabilityResult = product.cart.checkAvailability()
+        if not stockAvailable:
+            break
+    if allItemsAvailable:
+        payment.processPayment()
+        paymentStatus = cart.payment.processPayment()
+        if paymentSuccessful:
+            order.createOrder()
+            order.inventory.reserveProduct()
+            eachCartItem = []
+            for item in eachCartItem:
+                inventory.product.updateStock()
+            order.shipping.createShipment()
+            shipmentCreated = order.shipping.createShipment()
+            order.notification.sendConfirmation()
+            cart.clearCart()
         else:
-            cart.notification.sendOutOfStock()
+            cart.notification.sendPaymentFailure()
+    else:
+        cart.notification.sendOutOfStock()

@@ -143,19 +143,22 @@ def run_sequence():
 
     customer.checkOut()
     cart.calculateTotal()
-    eachCartItem = True
-    while eachCartItem:
+    while True:  # loop eachCartItem
         product.checkAvailability()
         inventory.checkStock()
+        break  # loop termination not specified in UML
+    if True:  # alt allItemsAvailable
         payment.processPayment()
-        order.createOrder()
-        order.inventory.reserveProduct()
-        eachCartItem = False
-    if payment.processPayment():
-        order.shipping.createShipment()
-        notification.sendConfirmation()
-        cart.clearCart()
-    else:
-        notification.sendPaymentFailure()
-    if not inventory.checkStock():
+        if True:  # alt paymentSuccessful
+            order.createOrder()
+            inventory.reserveProduct()
+            while True:  # loop eachCartItem
+                product.updateStock()
+                break  # loop termination not specified in UML
+            shipping.createShipment()
+            notification.sendConfirmation()
+            cart.clearCart()
+        else:  # paymentFailed
+            notification.sendPaymentFailure()
+    else:  # outOfStock
         notification.sendOutOfStock()
