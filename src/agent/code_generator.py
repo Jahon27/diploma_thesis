@@ -1,5 +1,5 @@
 from openai import OpenAI
-
+from agent.code_cleaner import clean_generated_code
 
 def generate_code(
     client: OpenAI,
@@ -63,6 +63,47 @@ Rules:
 - Do not use Markdown fences.
 - Do not explain the result.
 
+MANDATORY PYTHON OUTPUT STRUCTURE:
+
+Generate ONE complete, self-contained Python module.
+
+PART 1 — CLASS DEFINITIONS:
+- Generate every class specified in the CLASS MODEL.
+- Define all classes at the top level of the module.
+- Preserve the exact class names.
+- Preserve every UML attribute and method.
+- Implement __init__ to initialize UML attributes using self.attribute.
+- Keep methods inside their corresponding classes.
+- If a UML method has no specified behavior, use pass.
+- Do not omit any UML class, attribute, or method.
+- Do not define classes inside run_sequence.
+- Do not import UML classes from external modules.
+
+PART 2 — SEQUENCE IMPLEMENTATION:
+- After all class definitions, define a top-level
+  function named run_sequence.
+- Create the UML participant objects inside run_sequence.
+- Execute UML method calls inside run_sequence.
+- Preserve the exact receiver.method() format from SQD.
+- Preserve the exact order of calls.
+- Translate UML loop fragments into Python while loops.
+- Translate UML alt fragments into Python if/else statements,
+  only when present in the SEQUENCE MODEL.
+- Preserve UML conditions exactly when valid Python.
+- Pass external condition variables as function parameters
+  rather than inventing constant values.
+- Do not invent statements that force a loop to terminate.
+- Do not execute run_sequence automatically.
+
+CRITICAL REQUIREMENTS:
+- The output MUST include BOTH parts.
+- Never return only the classes.
+- Never return only run_sequence.
+- Return the complete Python file, not a code fragment.
+- All UML classes must be defined before run_sequence.
+- Return only syntactically valid Python source code.
+- Do not include Markdown fences or explanations.
+
 CLASS MODEL:
 
 {class_model}
@@ -88,4 +129,4 @@ SEQUENCE MODEL (SQD):
             f"Generation model returned no choices: {response}"
         )
 
-    return response.choices[0].message.content
+    return clean_generated_code(response.choices[0].message.content)

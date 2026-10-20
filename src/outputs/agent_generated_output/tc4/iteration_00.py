@@ -38,17 +38,19 @@ class Notification:
     def sendConfirmation(self):
         pass
 
-# Sequence implementation
-order = Order(0, 0)
-orderitem = OrderItem(0)
-inventory = Inventory(0)
-product = Product(0, 0)
-notification = Notification("")
+def run_sequence():
+    order = Order(orderId=None, totalAmount=None)
+    orderitem = OrderItem(quantity=None)
+    inventory = Inventory(inventoryId=None)
+    product = Product(productId=None, stockQuantity=None)
+    notification = Notification(message=None)
 
-order.createOrder()
-for eachOrderItem in range(1):  # Simplified loop
-    orderitem.processItem()
-    inventory.reserveProduct()
-    product.updateStock()
-order.confirmOrder()
-notification.sendConfirmation()
+    order.createOrder()
+    eachOrderItem = True  # Placeholder for loop condition
+    while eachOrderItem:
+        order.processItem()
+        orderitem.reserveProduct()
+        inventory.updateStock()
+        break  # Simplified loop termination
+    order.confirmOrder()
+    order.sendConfirmation()

@@ -1,5 +1,5 @@
 from openai import OpenAI
-
+from agent.code_cleaner import clean_generated_code
 
 def repair_code(
     client: OpenAI,
@@ -42,6 +42,36 @@ Rules:
 - Do not use Markdown fences.
 - Do not explain your answer.
 
+SEQUENCE IMPLEMENTATION RULES:
+- Implement the UML sequence diagram inside a top-level
+  Python function named run_sequence.
+- Create all sequence participant objects inside run_sequence.
+- Preserve the exact order of UML method calls.
+- Translate UML "loop" fragments into Python while loops.
+- Translate UML "alt" fragments into Python if/else statements,
+  but only if they exist in the sequence model.
+- Preserve the original loop and alternative conditions.
+- Do not invent loop termination statements such as
+  "eachOrderItem = False".
+- Do not place sequence execution statements at module level.
+- Do not automatically execute run_sequence.
+- Return only valid Python source code.
+
+MANDATORY REPAIR OUTPUT:
+- Return the COMPLETE corrected Python module.
+- Include EVERY class from the CLASS MODEL.
+- Include all UML attributes and methods.
+- Define classes at module level.
+- Include a top-level run_sequence function.
+- Include every required UML sequence call.
+- Preserve UML call order and control-flow conditions.
+- Preserve correct code while repairing incorrect code.
+- Never remove correct classes to repair the sequence.
+- Never remove the sequence to repair class definitions.
+- Never return only the modified fragment.
+- Never invent additional UML elements.
+
+
 CLASS MODEL:
 
 {class_model}
@@ -82,4 +112,4 @@ EVALUATOR FEEDBACK:
             "Repair model returned an empty response."
         )
 
-    return content
+    return clean_generated_code(content)

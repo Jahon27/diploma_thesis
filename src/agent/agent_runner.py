@@ -1,10 +1,7 @@
 from pathlib import Path
 
 from agent.agent_graph import agent_graph
-from agent.uml_context_builder import (
-    build_class_model,
-    build_sequence_model,
-)
+from agent.uml_context_builder import (build_class_model, build_sequence_model,)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,11 +39,7 @@ def run_agent(
     final_state = agent_graph.invoke(initial_state)
 
     print("\n=== AGENT FINISHED ===")
-
-    print(
-        "Iterations:",
-        final_state["iteration"]
-    )
+    print("Iterations:", final_state["iteration"])
 
     print(
         "Final UML fidelity:",
@@ -55,38 +48,13 @@ def run_agent(
         ["overall_uml_fidelity"]
     )
 
-    print(
-        "Final output:",
-        final_state["output_path"]
-    )
-
+    print("Final output:", final_state["output_path"])
 
 if __name__ == "__main__":
     run_agent(
-        class_xml_path=(
-            BASE_DIR
-            / "diagrams"
-            / "tc4-class.drawio.xml"
-        ),
-
-        sequence_xml_path=(
-            BASE_DIR
-            / "diagrams"
-            / "tc4-sequence.drawio.xml"
-        ),
-
-        reference_path=(
-            BASE_DIR
-            / "reference"
-            / "testcase4.py"
-        ),
-
-        output_dir=(
-            BASE_DIR
-            / "outputs"
-            / "agent_generated_output"
-            / "tc4"
-        ),
-
+        class_xml_path=(BASE_DIR/ "diagrams"/ "online-shopping-class.drawio.xml"),
+        sequence_xml_path=(BASE_DIR/ "diagrams"/ "online-shopping-sequence.drawio.xml"),
+        reference_path=(BASE_DIR / "reference" / "online_shopping_reference.py"),
+        output_dir=(BASE_DIR / "outputs" / "agent_generated_output" / "shopping_testcase"),
         max_iterations=3,
     )
