@@ -1,0 +1,97 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="print-batch-sequence" name="Print batch - sequence">
+    <mxGraphModel dx="1310" dy="846" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1320" pageHeight="810" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="batch" parent="1" style="shape=mxgraph.sysml.package;html=1;labelX=35;fontStyle=1;align=left;verticalAlign=top;spacingLeft=5;spacingTop=-3;fillColor=none;strokeColor=#536578;" value="loop" vertex="1">
+          <mxGeometry height="634" width="1250" x="35" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="availability" parent="1" style="shape=mxgraph.sysml.package;html=1;labelX=35;fontStyle=1;align=left;verticalAlign=top;spacingLeft=5;spacingTop=-3;fillColor=none;strokeColor=#536578;" value="alt" vertex="1">
+          <mxGeometry height="380" width="1210" x="55" y="329" as="geometry" />
+        </mxCell>
+        <mxCell id="branch-divider" parent="1" style="line;dashed=1;strokeColor=#536578;" value="" vertex="1">
+          <mxGeometry height="8" width="1210" x="55" y="536" as="geometry" />
+        </mxCell>
+        <mxCell id="batch-guard" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[queuedJob]" vertex="1">
+          <mxGeometry height="22" width="130" x="66" y="109" as="geometry" />
+        </mxCell>
+        <mxCell id="ready-guard" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[printerReady]" vertex="1">
+          <mxGeometry height="22" width="145" x="84" y="329" as="geometry" />
+        </mxCell>
+        <mxCell id="unavailable-guard" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[printerUnavailable]" vertex="1">
+          <mxGeometry height="22" width="165" x="51" y="544" as="geometry" />
+        </mxCell>
+        <mxCell id="spooler" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="spooler: PrintSpooler" vertex="1">
+          <mxGeometry height="725" width="200" x="25" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="queue" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="queue: PrintQueue" vertex="1">
+          <mxGeometry height="725" width="200" x="285" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="job" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="job: PrintJob" vertex="1">
+          <mxGeometry height="725" width="200" x="545" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="printer" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="printer: OfficePrinter" vertex="1">
+          <mxGeometry height="725" width="200" x="805" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="log" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="log: PrintLog" vertex="1">
+          <mxGeometry height="725" width="200" x="1065" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="message-0" edge="1" parent="1" source="spooler" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.18344827586206897;exitPerimeter=0;entryX=0.5;entryY=0.18344827586206897;entryPerimeter=0;" target="queue" value="dequeue()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="125" y="178" as="sourcePoint" />
+            <mxPoint x="385" y="178" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-1" edge="1" parent="1" source="queue" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.2413793103448276;exitPerimeter=0;entryX=0.5;entryY=0.2413793103448276;entryPerimeter=0;" target="spooler" value="job">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="385" y="220" as="sourcePoint" />
+            <mxPoint x="125" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-2" edge="1" parent="1" source="spooler" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.3006896551724138;exitPerimeter=0;entryX=0.5;entryY=0.3006896551724138;entryPerimeter=0;" target="printer" value="canPrint(job)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="125" y="263" as="sourcePoint" />
+            <mxPoint x="905" y="263" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-3" edge="1" parent="1" source="printer" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.3586206896551724;exitPerimeter=0;entryX=0.5;entryY=0.3586206896551724;entryPerimeter=0;" target="spooler" value="printerReady">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="905" y="305" as="sourcePoint" />
+            <mxPoint x="125" y="305" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-4" edge="1" parent="1" source="spooler" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.47448275862068967;exitPerimeter=0;entryX=0.5;entryY=0.47448275862068967;entryPerimeter=0;" target="printer" value="printDocument(job)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="125" y="389" as="sourcePoint" />
+            <mxPoint x="905" y="389" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-5" edge="1" parent="1" source="spooler" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.5420689655172414;exitPerimeter=0;entryX=0.5;entryY=0.5420689655172414;entryPerimeter=0;" target="job" value="markPrinted()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="125" y="438" as="sourcePoint" />
+            <mxPoint x="645" y="438" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-6" edge="1" parent="1" source="spooler" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.6096551724137931;exitPerimeter=0;entryX=0.5;entryY=0.6096551724137931;entryPerimeter=0;" target="log" value="recordPrinted(job)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="125" y="487" as="sourcePoint" />
+            <mxPoint x="1165" y="487" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-7" edge="1" parent="1" source="spooler" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.7572413793103449;exitPerimeter=0;entryX=0.5;entryY=0.7572413793103449;entryPerimeter=0;" target="job" value="markDeferred()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="125" y="594" as="sourcePoint" />
+            <mxPoint x="645" y="594" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-8" edge="1" parent="1" source="spooler" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.833103448275862;exitPerimeter=0;entryX=0.5;entryY=0.833103448275862;entryPerimeter=0;" target="log" value="recordDeferred(job)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="125" y="649" as="sourcePoint" />
+            <mxPoint x="1165" y="649" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

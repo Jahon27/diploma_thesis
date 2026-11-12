@@ -1,0 +1,94 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="easy-02-parcel-pickup-class" name="Parcel pickup - Class">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1110" pageHeight="550">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kiosk" parent="1" vertex="1" value="PickupKiosk" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#6c8ebf;">
+          <mxGeometry as="geometry" x="40" y="60" width="280" height="136" />
+        </mxCell>
+        <mxCell id="kiosk-attribute-0" parent="kiosk" vertex="1" value="- kioskId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="32" width="280" height="24" />
+        </mxCell>
+        <mxCell id="kiosk-attribute-1" parent="kiosk" vertex="1" value="- location: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="56" width="280" height="24" />
+        </mxCell>
+        <mxCell id="kiosk-attribute-2" parent="kiosk" vertex="1" value="- lastStatus: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="80" width="280" height="24" />
+        </mxCell>
+        <mxCell id="kiosk-divider" parent="kiosk" vertex="1" value="" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry as="geometry" x="0" y="104" width="280" height="8" />
+        </mxCell>
+        <mxCell id="kiosk-method-0" parent="kiosk" vertex="1" value="+ submitCode(code: str): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="112" width="280" height="24" />
+        </mxCell>
+        <mxCell id="service" parent="1" vertex="1" value="PickupService" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#6c8ebf;">
+          <mxGeometry as="geometry" x="410" y="60" width="280" height="136" />
+        </mxCell>
+        <mxCell id="service-attribute-0" parent="service" vertex="1" value="- serviceId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="32" width="280" height="24" />
+        </mxCell>
+        <mxCell id="service-attribute-1" parent="service" vertex="1" value="- pickupCode: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="56" width="280" height="24" />
+        </mxCell>
+        <mxCell id="service-attribute-2" parent="service" vertex="1" value="- attemptCount: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="80" width="280" height="24" />
+        </mxCell>
+        <mxCell id="service-divider" parent="service" vertex="1" value="" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry as="geometry" x="0" y="104" width="280" height="8" />
+        </mxCell>
+        <mxCell id="service-method-0" parent="service" vertex="1" value="+ collectParcel(code: str): str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="112" width="280" height="24" />
+        </mxCell>
+        <mxCell id="log" parent="1" vertex="1" value="PickupLog" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#6c8ebf;">
+          <mxGeometry as="geometry" x="780" y="60" width="280" height="160" />
+        </mxCell>
+        <mxCell id="log-attribute-0" parent="log" vertex="1" value="- logId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="32" width="280" height="24" />
+        </mxCell>
+        <mxCell id="log-attribute-1" parent="log" vertex="1" value="- lastOutcome: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="56" width="280" height="24" />
+        </mxCell>
+        <mxCell id="log-attribute-2" parent="log" vertex="1" value="- eventCount: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="80" width="280" height="24" />
+        </mxCell>
+        <mxCell id="log-divider" parent="log" vertex="1" value="" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry as="geometry" x="0" y="104" width="280" height="8" />
+        </mxCell>
+        <mxCell id="log-method-0" parent="log" vertex="1" value="+ recordSuccess(): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="112" width="280" height="24" />
+        </mxCell>
+        <mxCell id="log-method-1" parent="log" vertex="1" value="+ recordDenial(): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="136" width="280" height="24" />
+        </mxCell>
+        <mxCell id="locker" parent="1" vertex="1" value="ParcelLocker" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#6c8ebf;">
+          <mxGeometry as="geometry" x="410" y="310" width="280" height="136" />
+        </mxCell>
+        <mxCell id="locker-attribute-0" parent="locker" vertex="1" value="- lockerId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="32" width="280" height="24" />
+        </mxCell>
+        <mxCell id="locker-attribute-1" parent="locker" vertex="1" value="- parcelId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="56" width="280" height="24" />
+        </mxCell>
+        <mxCell id="locker-attribute-2" parent="locker" vertex="1" value="- doorOpen: bool" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="80" width="280" height="24" />
+        </mxCell>
+        <mxCell id="locker-divider" parent="locker" vertex="1" value="" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry as="geometry" x="0" y="104" width="280" height="8" />
+        </mxCell>
+        <mxCell id="locker-method-0" parent="locker" vertex="1" value="+ unlock(): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry as="geometry" x="0" y="112" width="280" height="24" />
+        </mxCell>
+        <mxCell id="kiosk-uses-service" parent="1" edge="1" source="kiosk" target="service" style="dashed=1;endArrow=open;endFill=0;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="service-uses-log" parent="1" edge="1" source="service" target="log" style="dashed=1;endArrow=open;endFill=0;exitX=1;exitY=0.5;entryX=0;entryY=0.44736842;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="service-uses-locker" parent="1" edge="1" source="service" target="locker" style="dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

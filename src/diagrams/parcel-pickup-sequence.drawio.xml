@@ -1,0 +1,70 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="easy-02-parcel-pickup-sequence" name="Parcel pickup - Sequence">
+    <mxGraphModel dx="1076" dy="695" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1120" pageHeight="620" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="outcome" parent="1" style="shape=mxgraph.sysml.package;html=1;labelX=35;fontStyle=1;align=left;verticalAlign=top;spacingLeft=5;spacingTop=-3;fillColor=none;strokeColor=#536578;" value="alt" vertex="1">
+          <mxGeometry height="305" width="1034" x="43" y="167" as="geometry" />
+        </mxCell>
+        <mxCell id="branch-divider" parent="1" style="line;dashed=1;strokeColor=#536578;" value="" vertex="1">
+          <mxGeometry height="8" width="1034" x="43" y="326" as="geometry" />
+        </mxCell>
+        <mxCell id="guard-valid" parent="1" style="text;align=left;verticalAlign=middle;fontStyle=1;spacingLeft=4;" value="[codeValid]" vertex="1">
+          <mxGeometry height="24" width="125" x="77.5" y="164" as="geometry" />
+        </mxCell>
+        <mxCell id="guard-invalid" parent="1" style="text;align=left;verticalAlign=middle;fontStyle=1;spacingLeft=4;" value="[codeInvalid]" vertex="1">
+          <mxGeometry height="24" width="125" x="45" y="331" as="geometry" />
+        </mxCell>
+        <mxCell id="kiosk" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="kiosk: PickupKiosk" vertex="1">
+          <mxGeometry height="490" width="194" x="43" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="service" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="service: PickupService" vertex="1">
+          <mxGeometry height="490" width="194" x="323" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="locker" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="locker: ParcelLocker" vertex="1">
+          <mxGeometry height="490" width="194" x="603" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="log" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="log: PickupLog" vertex="1">
+          <mxGeometry height="490" width="194" x="883" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="collect" edge="1" parent="1" source="kiosk" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.17346938775510204;exitPerimeter=0;entryX=0.5;entryY=0.17346938775510204;entryPerimeter=0;" target="service" value="collectParcel(code)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="130" as="sourcePoint" />
+            <mxPoint x="420" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="unlock" edge="1" parent="1" source="service" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.40408163265306124;exitPerimeter=0;entryX=0.5;entryY=0.40408163265306124;entryPerimeter=0;" target="locker" value="unlock()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="243" as="sourcePoint" />
+            <mxPoint x="700" y="243" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="success-log" edge="1" parent="1" source="service" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.47551020408163264;exitPerimeter=0;entryX=0.5;entryY=0.47551020408163264;entryPerimeter=0;" target="log" value="recordSuccess()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="278" as="sourcePoint" />
+            <mxPoint x="980" y="278" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="collected" edge="1" parent="1" source="service" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.5387755102040817;exitPerimeter=0;entryX=0.5;entryY=0.5387755102040817;entryPerimeter=0;" target="kiosk" value="pickupAccepted">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="309" as="sourcePoint" />
+            <mxPoint x="140" y="309" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="denial-log" edge="1" parent="1" source="service" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.6938775510204082;exitPerimeter=0;entryX=0.5;entryY=0.6938775510204082;entryPerimeter=0;" target="log" value="recordDenial()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="385" as="sourcePoint" />
+            <mxPoint x="980" y="385" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="denied" edge="1" parent="1" source="service" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.7959183673469388;exitPerimeter=0;entryX=0.5;entryY=0.7959183673469388;entryPerimeter=0;" target="kiosk" value="pickupDenied">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="435" as="sourcePoint" />
+            <mxPoint x="140" y="435" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

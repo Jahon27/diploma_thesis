@@ -152,13 +152,13 @@ def main():
     reference = (
         BASE_DIR
         / "reference"
-        / "testcase4.py"
+        / "order.py"
     )
 
     parser_output = (
         BASE_DIR
         / "outputs"
-        / "testcase4.py"
+        / "order.py"
     )
 
     nemotron_output = (

@@ -1,0 +1,259 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="dataset-backup-class" name="Dataset backup - class">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1350" pageHeight="925">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="coordinator" parent="1" vertex="1" value="BackupCoordinator" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;">
+          <mxGeometry x="520" y="340" width="310" height="238" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-field-0" parent="coordinator" vertex="1" value="- batchId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="32" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-field-1" parent="coordinator" vertex="1" value="- startedAt: datetime" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="54" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-field-2" parent="coordinator" vertex="1" value="- datasetCount: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="76" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-field-3" parent="coordinator" vertex="1" value="- storedChunkCount: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="98" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-field-4" parent="coordinator" vertex="1" value="- rejectedChunkCount: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="120" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-divider" parent="coordinator" vertex="1" value="" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry x="0" y="142" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-method-0" parent="coordinator" vertex="1" value="+ runBatch(): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="150" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-method-1" parent="coordinator" vertex="1" value="+ backupDataset(datasetId: str): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="172" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-method-2" parent="coordinator" vertex="1" value="+ backupChunk(chunk: bytes): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="194" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-method-3" parent="coordinator" vertex="1" value="+ resetCounters(): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="216" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog" parent="1" vertex="1" value="DatasetCatalog" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;">
+          <mxGeometry x="70" y="50" width="310" height="238" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog-field-0" parent="catalog" vertex="1" value="- catalogId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="32" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog-field-1" parent="catalog" vertex="1" value="- datasetIds: list[str]" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="54" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog-field-2" parent="catalog" vertex="1" value="- nextIndex: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="76" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog-field-3" parent="catalog" vertex="1" value="- enabledCount: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="98" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog-field-4" parent="catalog" vertex="1" value="- updatedAt: datetime" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="120" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog-divider" parent="catalog" vertex="1" value="" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry x="0" y="142" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog-method-0" parent="catalog" vertex="1" value="+ hasNextDataset(): bool" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="150" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog-method-1" parent="catalog" vertex="1" value="+ nextDataset(): str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="172" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog-method-2" parent="catalog" vertex="1" value="+ isEnabled(datasetId: str): bool" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="194" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog-method-3" parent="catalog" vertex="1" value="+ rewind(): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="216" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot" parent="1" vertex="1" value="SnapshotService" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;">
+          <mxGeometry x="520" y="50" width="310" height="238" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-field-0" parent="snapshot" vertex="1" value="- serviceId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="32" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-field-1" parent="snapshot" vertex="1" value="- sourceRoot: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="54" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-field-2" parent="snapshot" vertex="1" value="- snapshotRoot: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="76" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-field-3" parent="snapshot" vertex="1" value="- timeoutSeconds: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="98" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-field-4" parent="snapshot" vertex="1" value="- lastSnapshotId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="120" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-divider" parent="snapshot" vertex="1" value="" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry x="0" y="142" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-method-0" parent="snapshot" vertex="1" value="+ createSnapshot(datasetId: str): str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="150" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-method-1" parent="snapshot" vertex="1" value="+ snapshotExists(snapshotId: str): bool" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="172" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-method-2" parent="snapshot" vertex="1" value="+ releaseSnapshot(snapshotId: str): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="194" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-method-3" parent="snapshot" vertex="1" value="+ getSnapshotPath(snapshotId: str): str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="216" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="reader" parent="1" vertex="1" value="ChunkReader" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;">
+          <mxGeometry x="970" y="50" width="310" height="238" as="geometry" />
+        </mxCell>
+        <mxCell id="reader-field-0" parent="reader" vertex="1" value="- readerId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="32" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="reader-field-1" parent="reader" vertex="1" value="- snapshotId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="54" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="reader-field-2" parent="reader" vertex="1" value="- chunkSizeBytes: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="76" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="reader-field-3" parent="reader" vertex="1" value="- byteOffset: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="98" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="reader-field-4" parent="reader" vertex="1" value="- bytesRemaining: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="120" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="reader-divider" parent="reader" vertex="1" value="" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry x="0" y="142" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="reader-method-0" parent="reader" vertex="1" value="+ openSnapshot(snapshotId: str): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="150" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="reader-method-1" parent="reader" vertex="1" value="+ hasNextChunk(): bool" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="172" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="reader-method-2" parent="reader" vertex="1" value="+ nextChunk(): bytes" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="194" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="reader-method-3" parent="reader" vertex="1" value="+ closeSnapshot(): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="216" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity" parent="1" vertex="1" value="IntegrityChecker" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;">
+          <mxGeometry x="70" y="630" width="310" height="238" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity-field-0" parent="integrity" vertex="1" value="- checkerId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="32" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity-field-1" parent="integrity" vertex="1" value="- algorithm: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="54" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity-field-2" parent="integrity" vertex="1" value="- manifestPath: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="76" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity-field-3" parent="integrity" vertex="1" value="- verifiedCount: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="98" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity-field-4" parent="integrity" vertex="1" value="- failedCount: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="120" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity-divider" parent="integrity" vertex="1" value="" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry x="0" y="142" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity-method-0" parent="integrity" vertex="1" value="+ verifyChecksum(chunk: bytes): bool" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="150" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity-method-1" parent="integrity" vertex="1" value="+ computeChecksum(chunk: bytes): str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="172" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity-method-2" parent="integrity" vertex="1" value="+ loadManifest(snapshotId: str): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="194" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity-method-3" parent="integrity" vertex="1" value="+ resetStatistics(): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="216" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="storage" parent="1" vertex="1" value="BackupStore" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;">
+          <mxGeometry x="520" y="630" width="310" height="238" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-field-0" parent="storage" vertex="1" value="- storeId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="32" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-field-1" parent="storage" vertex="1" value="- bucketName: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="54" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-field-2" parent="storage" vertex="1" value="- keyPrefix: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="76" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-field-3" parent="storage" vertex="1" value="- quotaBytes: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="98" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-field-4" parent="storage" vertex="1" value="- usedBytes: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="120" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-divider" parent="storage" vertex="1" value="" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry x="0" y="142" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-method-0" parent="storage" vertex="1" value="+ storeChunk(chunk: bytes): str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="150" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-method-1" parent="storage" vertex="1" value="+ readChunk(chunkKey: str): bytes" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="172" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-method-2" parent="storage" vertex="1" value="+ hasChunk(chunkKey: str): bool" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="194" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-method-3" parent="storage" vertex="1" value="+ availableBytes(): int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="216" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="audit" parent="1" vertex="1" value="BackupAuditLog" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;">
+          <mxGeometry x="970" y="630" width="310" height="238" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-field-0" parent="audit" vertex="1" value="- logId: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="32" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-field-1" parent="audit" vertex="1" value="- destination: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="54" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-field-2" parent="audit" vertex="1" value="- eventCount: int" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="76" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-field-3" parent="audit" vertex="1" value="- lastEvent: str" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="98" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-field-4" parent="audit" vertex="1" value="- lastRecordedAt: datetime" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="120" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-divider" parent="audit" vertex="1" value="" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry x="0" y="142" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-method-0" parent="audit" vertex="1" value="+ recordStored(chunkKey: str): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="150" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-method-1" parent="audit" vertex="1" value="+ recordCorruptChunk(): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="172" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-method-2" parent="audit" vertex="1" value="+ recordSnapshotFailure(datasetId: str): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="194" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-method-3" parent="audit" vertex="1" value="+ flush(): void" style="text;align=left;verticalAlign=middle;spacingLeft=8;">
+          <mxGeometry x="0" y="216" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-catalog" parent="1" edge="1" source="coordinator" target="catalog" value="" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.18;exitY=0;entryX=0.5;entryY=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-snapshot" parent="1" edge="1" source="coordinator" target="snapshot" value="" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0;entryX=0.5;entryY=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-reader" parent="1" edge="1" source="coordinator" target="reader" value="" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.82;exitY=0;entryX=0.5;entryY=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-integrity" parent="1" edge="1" source="coordinator" target="integrity" value="" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.18;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-storage" parent="1" edge="1" source="coordinator" target="storage" value="" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-audit" parent="1" edge="1" source="coordinator" target="audit" value="" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.82;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

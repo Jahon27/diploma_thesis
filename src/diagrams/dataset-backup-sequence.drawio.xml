@@ -1,0 +1,163 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="dataset-backup-sequence" name="Dataset backup - sequence">
+    <mxGraphModel dx="1762" dy="1138" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1740" pageHeight="1110" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="datasets" parent="1" style="shape=mxgraph.sysml.package;html=1;labelX=35;fontStyle=1;align=left;verticalAlign=top;spacingLeft=5;spacingTop=-3;fillColor=none;strokeColor=#536578;" value="loop" vertex="1">
+          <mxGeometry height="934" width="1676" x="32" y="106" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-result" parent="1" style="shape=mxgraph.sysml.package;html=1;labelX=35;fontStyle=1;align=left;verticalAlign=top;spacingLeft=5;spacingTop=-3;fillColor=none;strokeColor=#6c8ebf;" value="alt" vertex="1">
+          <mxGeometry height="759" width="1640" x="50" y="242" as="geometry" />
+        </mxCell>
+        <mxCell id="chunks" parent="1" style="shape=mxgraph.sysml.package;html=1;labelX=35;fontStyle=1;align=left;verticalAlign=top;spacingLeft=5;spacingTop=-3;fillColor=none;strokeColor=#536578;" value="loop" vertex="1">
+          <mxGeometry height="545" width="1604" x="68" y="326" as="geometry" />
+        </mxCell>
+        <mxCell id="checksum-result" parent="1" style="shape=mxgraph.sysml.package;html=1;labelX=35;fontStyle=1;align=left;verticalAlign=top;spacingLeft=5;spacingTop=-3;fillColor=none;strokeColor=#6c8ebf;" value="alt" vertex="1">
+          <mxGeometry height="316" width="1568" x="86" y="516" as="geometry" />
+        </mxCell>
+        <mxCell id="checksum-divider" parent="1" style="line;dashed=1;strokeColor=#536578;" value="" vertex="1">
+          <mxGeometry height="8" width="1568" x="86" y="703" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-divider" parent="1" style="line;dashed=1;strokeColor=#536578;" value="" vertex="1">
+          <mxGeometry height="8" width="1640" x="50" y="918" as="geometry" />
+        </mxCell>
+        <mxCell id="dataset-guard" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[hasNextDataset]" vertex="1">
+          <mxGeometry height="22" width="175" x="62" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-ready" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[snapshotCreated]" vertex="1">
+          <mxGeometry height="22" width="175" x="80" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="chunk-guard" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[hasNextChunk]" vertex="1">
+          <mxGeometry height="22" width="175" x="97" y="323" as="geometry" />
+        </mxCell>
+        <mxCell id="checksum-valid" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[checksumValid]" vertex="1">
+          <mxGeometry height="22" width="175" x="115" y="513" as="geometry" />
+        </mxCell>
+        <mxCell id="checksum-invalid" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[checksumInvalid]" vertex="1">
+          <mxGeometry height="22" width="175" x="81" y="711" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot-failed" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[snapshotFailed]" vertex="1">
+          <mxGeometry height="22" width="175" x="46" y="924" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="coordinator: BackupCoordinator" vertex="1">
+          <mxGeometry height="1040" width="222" x="15" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="catalog" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="catalog: DatasetCatalog" vertex="1">
+          <mxGeometry height="1040" width="222" x="261" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshot" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="snapshot: SnapshotService" vertex="1">
+          <mxGeometry height="1040" width="222" x="507" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="reader" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="reader: ChunkReader" vertex="1">
+          <mxGeometry height="1040" width="222" x="753" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="integrity" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="integrity: IntegrityChecker" vertex="1">
+          <mxGeometry height="1040" width="222" x="999" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="storage" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="storage: BackupStore" vertex="1">
+          <mxGeometry height="1040" width="222" x="1245" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="audit" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="audit: BackupAuditLog" vertex="1">
+          <mxGeometry height="1040" width="222" x="1491" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="message-0" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.11538461538461539;exitPerimeter=0;entryX=0.5;entryY=0.11538461538461539;entryPerimeter=0;" target="catalog" value="nextDataset()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="158" as="sourcePoint" />
+            <mxPoint x="372" y="158" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-1" edge="1" parent="1" source="catalog" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.13846153846153847;exitPerimeter=0;entryX=0.5;entryY=0.13846153846153847;entryPerimeter=0;" target="coordinator" value="datasetId">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="372" y="182" as="sourcePoint" />
+            <mxPoint x="126" y="182" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-2" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.16153846153846155;exitPerimeter=0;entryX=0.5;entryY=0.16153846153846155;entryPerimeter=0;" target="snapshot" value="createSnapshot(datasetId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="206" as="sourcePoint" />
+            <mxPoint x="618" y="206" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-3" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.2375;exitPerimeter=0;entryX=0.5;entryY=0.2375;entryPerimeter=0;" target="reader" value="openSnapshot(snapshotId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="285" as="sourcePoint" />
+            <mxPoint x="864" y="285" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-4" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.3384615384615385;exitPerimeter=0;entryX=0.5;entryY=0.3384615384615385;entryPerimeter=0;" target="reader" value="nextChunk()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="390" as="sourcePoint" />
+            <mxPoint x="864" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-5" edge="1" parent="1" source="reader" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.3721153846153846;exitPerimeter=0;entryX=0.5;entryY=0.3721153846153846;entryPerimeter=0;" target="coordinator" value="chunk">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="864" y="425" as="sourcePoint" />
+            <mxPoint x="126" y="425" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-6" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.40384615384615385;exitPerimeter=0;entryX=0.5;entryY=0.40384615384615385;entryPerimeter=0;" target="integrity" value="verifyChecksum(chunk)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="458" as="sourcePoint" />
+            <mxPoint x="1110" y="458" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-7" edge="1" parent="1" source="integrity" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.4346153846153846;exitPerimeter=0;entryX=0.5;entryY=0.4346153846153846;entryPerimeter=0;" target="coordinator" value="checksumValid">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1110" y="490" as="sourcePoint" />
+            <mxPoint x="126" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-8" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.5144230769230769;exitPerimeter=0;entryX=0.5;entryY=0.5144230769230769;entryPerimeter=0;" target="storage" value="storeChunk(chunk)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="573" as="sourcePoint" />
+            <mxPoint x="1356" y="573" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-9" edge="1" parent="1" source="storage" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.551923076923077;exitPerimeter=0;entryX=0.5;entryY=0.551923076923077;entryPerimeter=0;" target="coordinator" value="chunkKey">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1356" y="612" as="sourcePoint" />
+            <mxPoint x="126" y="612" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-10" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.5971153846153846;exitPerimeter=0;entryX=0.5;entryY=0.5971153846153846;entryPerimeter=0;" target="audit" value="recordStored(chunkKey)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="659" as="sourcePoint" />
+            <mxPoint x="1602" y="659" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-11" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.7086538461538462;exitPerimeter=0;entryX=0.5;entryY=0.7086538461538462;entryPerimeter=0;" target="audit" value="recordCorruptChunk()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="775" as="sourcePoint" />
+            <mxPoint x="1602" y="775" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-12" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.8221153846153846;exitPerimeter=0;entryX=0.5;entryY=0.8221153846153846;entryPerimeter=0;" target="reader" value="closeSnapshot()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="893" as="sourcePoint" />
+            <mxPoint x="864" y="893" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-13" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.9019230769230769;exitPerimeter=0;entryX=0.5;entryY=0.9019230769230769;entryPerimeter=0;" target="audit" value="recordSnapshotFailure(datasetId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="976" as="sourcePoint" />
+            <mxPoint x="1602" y="976" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="snapshot-id" edge="1" parent="1" source="snapshot" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.18076923076923077;exitPerimeter=0;entryX=0.5;entryY=0.18076923076923077;entryPerimeter=0;" target="coordinator" value="snapshotId">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="618" y="226" as="sourcePoint" />
+            <mxPoint x="126" y="226" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="release" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.8432692307692308;exitPerimeter=0;entryX=0.5;entryY=0.8432692307692308;entryPerimeter=0;" target="snapshot" value="releaseSnapshot(snapshotId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="915" as="sourcePoint" />
+            <mxPoint x="618" y="915" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

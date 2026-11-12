@@ -2,9 +2,9 @@ from extractors.class_extractor import generate_class_code_from_xml
 from extractors.sequence_extractor_with_antlr_grammar import generate_sequence_code_from_xml
 
 def main():
-    class_xml = "./diagrams/tc4-class.drawio.xml"
-    sequence_xml = "./diagrams/tc4-sequence.drawio.xml"
-    output_py = "./outputs/testcase4.py"
+    class_xml = "./diagrams/warehouse-shift-class.drawio.xml"
+    sequence_xml = "./diagrams/warehouse-shift-sequence.drawio.xml"
+    output_py = "./outputs/parser_generated_output/warehouse_shift.py"
 
     class_code = generate_class_code_from_xml(class_xml)
     sequence_code = generate_sequence_code_from_xml(sequence_xml)

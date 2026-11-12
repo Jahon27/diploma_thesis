@@ -1,0 +1,169 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="warehouse-shift-sequence" name="Warehouse shift - Sequence">
+    <mxGraphModel dx="2086" dy="1347" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1740" pageHeight="1110" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="receiving-loop" parent="1" style="shape=mxgraph.sysml.package;html=1;labelX=35;fontStyle=1;align=left;verticalAlign=top;spacingLeft=5;spacingTop=-3;fillColor=none;strokeColor=#536578;" value="loop" vertex="1">
+          <mxGeometry height="419" width="1676" x="32" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-alt" parent="1" style="shape=mxgraph.sysml.package;html=1;labelX=35;fontStyle=1;align=left;verticalAlign=top;spacingLeft=5;spacingTop=-3;fillColor=none;strokeColor=#6c8ebf;" value="alt" vertex="1">
+          <mxGeometry height="241" width="1636" x="52" y="268" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-divider" parent="1" style="line;dashed=1;strokeColor=#536578;" value="" vertex="1">
+          <mxGeometry height="8" width="1636" x="52" y="406" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-hasReceipts" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[hasReceipts]" vertex="1">
+          <mxGeometry height="22" width="170" x="61" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-inspectionPassed" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[inspectionPassed]" vertex="1">
+          <mxGeometry height="22" width="170" x="80" y="264" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-inspectionFailed" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[inspectionFailed]" vertex="1">
+          <mxGeometry height="22" width="170" x="47" y="409" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-loop" parent="1" style="shape=mxgraph.sysml.package;html=1;labelX=35;fontStyle=1;align=left;verticalAlign=top;spacingLeft=5;spacingTop=-3;fillColor=none;strokeColor=#536578;" value="loop" vertex="1">
+          <mxGeometry height="419" width="1676" x="32" y="557" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-alt" parent="1" style="shape=mxgraph.sysml.package;html=1;labelX=35;fontStyle=1;align=left;verticalAlign=top;spacingLeft=5;spacingTop=-3;fillColor=none;strokeColor=#6c8ebf;" value="alt" vertex="1">
+          <mxGeometry height="241" width="1636" x="52" y="717" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-divider" parent="1" style="line;dashed=1;strokeColor=#536578;" value="" vertex="1">
+          <mxGeometry height="8" width="1636" x="52" y="855" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-hasOrders" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[hasOrders]" vertex="1">
+          <mxGeometry height="22" width="170" x="62" y="554" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-stockReserved" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[stockReserved]" vertex="1">
+          <mxGeometry height="22" width="170" x="83" y="715" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-stockUnavailable" parent="1" style="text;align=left;verticalAlign=middle;spacingLeft=8;fontStyle=1;" value="[stockUnavailable]" vertex="1">
+          <mxGeometry height="22" width="170" x="46" y="858" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="coordinator: WarehouseCoordinator" vertex="1">
+          <mxGeometry height="976" width="222" x="15" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="receiving: ReceivingQueue" vertex="1">
+          <mxGeometry height="976" width="222" x="261" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="inspection: GoodsInspector" vertex="1">
+          <mxGeometry height="976" width="222" x="507" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="inventory: StockInventory" vertex="1">
+          <mxGeometry height="976" width="222" x="753" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="dispatch: DispatchQueue" vertex="1">
+          <mxGeometry height="976" width="222" x="999" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="carrier: CarrierGateway" vertex="1">
+          <mxGeometry height="976" width="222" x="1245" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="audit" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;size=38;container=1;dropTarget=0;collapsible=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="audit: WarehouseAuditLog" vertex="1">
+          <mxGeometry height="976" width="222" x="1491" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="message-0" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.11168032786885246;exitPerimeter=0;entryX=0.5;entryY=0.11168032786885246;entryPerimeter=0;" target="receiving" value="nextReceipt()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="147" as="sourcePoint" />
+            <mxPoint x="372" y="147" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-1" edge="1" parent="1" source="receiving" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.14344262295081966;exitPerimeter=0;entryX=0.5;entryY=0.14344262295081966;entryPerimeter=0;" target="coordinator" value="receiptId">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="372" y="178" as="sourcePoint" />
+            <mxPoint x="126" y="178" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-2" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.1762295081967213;exitPerimeter=0;entryX=0.5;entryY=0.1762295081967213;entryPerimeter=0;" target="inspection" value="inspectReceipt(receiptId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="210" as="sourcePoint" />
+            <mxPoint x="618" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-3" edge="1" parent="1" source="inspection" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.21004098360655737;exitPerimeter=0;entryX=0.5;entryY=0.21004098360655737;entryPerimeter=0;" target="coordinator" value="inspectionPassed">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="618" y="243" as="sourcePoint" />
+            <mxPoint x="126" y="243" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-4" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.2930327868852459;exitPerimeter=0;entryX=0.5;entryY=0.2930327868852459;entryPerimeter=0;" target="inventory" value="receiveStock(receiptId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="324" as="sourcePoint" />
+            <mxPoint x="864" y="324" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-5" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.33811475409836067;exitPerimeter=0;entryX=0.5;entryY=0.33811475409836067;entryPerimeter=0;" target="audit" value="recordReceipt(receiptId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="368" as="sourcePoint" />
+            <mxPoint x="1602" y="368" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-6" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.43135245901639346;exitPerimeter=0;entryX=0.5;entryY=0.43135245901639346;entryPerimeter=0;" target="inspection" value="recordDefect(receiptId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="459" as="sourcePoint" />
+            <mxPoint x="618" y="459" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-7" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.4641393442622951;exitPerimeter=0;entryX=0.5;entryY=0.4641393442622951;entryPerimeter=0;" target="audit" value="recordRejection(receiptId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="491" as="sourcePoint" />
+            <mxPoint x="1602" y="491" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-8" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.5717213114754098;exitPerimeter=0;entryX=0.5;entryY=0.5717213114754098;entryPerimeter=0;" target="dispatch" value="nextOrder()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="596" as="sourcePoint" />
+            <mxPoint x="1110" y="596" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-9" edge="1" parent="1" source="dispatch" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.6034836065573771;exitPerimeter=0;entryX=0.5;entryY=0.6034836065573771;entryPerimeter=0;" target="coordinator" value="orderId">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1110" y="627" as="sourcePoint" />
+            <mxPoint x="126" y="627" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-10" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.6362704918032787;exitPerimeter=0;entryX=0.5;entryY=0.6362704918032787;entryPerimeter=0;" target="inventory" value="reserveStock(orderId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="659" as="sourcePoint" />
+            <mxPoint x="864" y="659" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-11" edge="1" parent="1" source="inventory" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.6700819672131147;exitPerimeter=0;entryX=0.5;entryY=0.6700819672131147;entryPerimeter=0;" target="coordinator" value="stockReserved">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="864" y="692" as="sourcePoint" />
+            <mxPoint x="126" y="692" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-12" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.7448770491803278;exitPerimeter=0;entryX=0.5;entryY=0.7448770491803278;entryPerimeter=0;" target="carrier" value="bookShipment(orderId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="765" as="sourcePoint" />
+            <mxPoint x="1356" y="765" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-13" edge="1" parent="1" source="carrier" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0.7715163934426229;exitPerimeter=0;entryX=0.5;entryY=0.7715163934426229;entryPerimeter=0;" target="coordinator" value="trackingId">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1356" y="791" as="sourcePoint" />
+            <mxPoint x="126" y="791" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-14" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.798155737704918;exitPerimeter=0;entryX=0.5;entryY=0.798155737704918;entryPerimeter=0;" target="inventory" value="commitShipment(orderId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="817" as="sourcePoint" />
+            <mxPoint x="864" y="817" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-15" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.8258196721311475;exitPerimeter=0;entryX=0.5;entryY=0.8258196721311475;entryPerimeter=0;" target="audit" value="recordShipment(trackingId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="844" as="sourcePoint" />
+            <mxPoint x="1602" y="844" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="message-16" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;html=1;verticalAlign=bottom;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.9006147540983607;exitPerimeter=0;entryX=0.5;entryY=0.9006147540983607;entryPerimeter=0;" target="audit" value="recordBackorder(orderId)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="917" as="sourcePoint" />
+            <mxPoint x="1602" y="917" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

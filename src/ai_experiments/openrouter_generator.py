@@ -143,7 +143,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 if __name__ == "__main__":
     generate_from_files(
-        BASE_DIR / "diagrams" / "tc5-class.drawio.xml",
-        BASE_DIR / "diagrams" / "tc5-sequence.drawio.xml",
+        BASE_DIR / "diagrams" / "payment-class.drawio.xml",
+        BASE_DIR / "diagrams" / "payment-sequence.drawio.xml",
         BASE_DIR / "outputs" / "ai_generated_output" / "gemini_testcase5_class_sequence.py"
     )

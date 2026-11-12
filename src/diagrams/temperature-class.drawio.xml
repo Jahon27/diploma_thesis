@@ -1,0 +1,37 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="easy-01-class" name="Temperature reading - Class">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="800" pageHeight="360">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="display" parent="1" vertex="1" value="TemperatureDisplay" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#6c8ebf;">
+          <mxGeometry x="60" y="90" width="240" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="display-reading" parent="display" vertex="1" value="- displayedCelsius: float" style="text;align=left;spacingLeft=8;verticalAlign=middle;">
+          <mxGeometry y="32" width="240" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="display-divider" parent="display" vertex="1" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry y="60" width="240" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="display-refresh" parent="display" vertex="1" value="+ refresh(): void" style="text;align=left;spacingLeft=8;verticalAlign=middle;">
+          <mxGeometry y="68" width="240" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="sensor" parent="1" vertex="1" value="TemperatureSensor" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#6c8ebf;">
+          <mxGeometry x="480" y="90" width="240" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="sensor-reading" parent="sensor" vertex="1" value="- currentCelsius: float" style="text;align=left;spacingLeft=8;verticalAlign=middle;">
+          <mxGeometry y="32" width="240" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="sensor-divider" parent="sensor" vertex="1" style="line;strokeColor=#6c8ebf;">
+          <mxGeometry y="60" width="240" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="sensor-read" parent="sensor" vertex="1" value="+ readCelsius(): float" style="text;align=left;spacingLeft=8;verticalAlign=middle;">
+          <mxGeometry y="68" width="240" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="display-uses-sensor" parent="1" edge="1" source="display" target="sensor" style="dashed=1;endArrow=open;endFill=0;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

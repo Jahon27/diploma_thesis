@@ -1,0 +1,259 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="warehouse-shift-class" name="Warehouse shift - Class">
+    <mxGraphModel dx="1327" dy="857" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="925" background="light-dark(#ffffff, #121212)" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="coordinator" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="WarehouseCoordinator" vertex="1">
+          <mxGeometry height="238" width="310" x="520" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-field-0" parent="coordinator" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- shiftId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-field-1" parent="coordinator" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- warehouseId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-field-2" parent="coordinator" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- receivedCount: int" vertex="1">
+          <mxGeometry height="22" width="310" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-field-3" parent="coordinator" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- shippedCount: int" vertex="1">
+          <mxGeometry height="22" width="310" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-field-4" parent="coordinator" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- exceptionCount: int" vertex="1">
+          <mxGeometry height="22" width="310" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-divider" parent="coordinator" style="line;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="8" width="310" y="142" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-method-0" parent="coordinator" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ runShift(): void" vertex="1">
+          <mxGeometry height="22" width="310" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-method-1" parent="coordinator" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ processReceipts(): void" vertex="1">
+          <mxGeometry height="22" width="310" y="172" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-method-2" parent="coordinator" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ processDispatches(): void" vertex="1">
+          <mxGeometry height="22" width="310" y="194" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinator-method-3" parent="coordinator" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ resetCounters(): void" vertex="1">
+          <mxGeometry height="22" width="310" y="216" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="ReceivingQueue" vertex="1">
+          <mxGeometry height="238" width="310" x="70" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-field-0" parent="receiving" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- queueId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-field-1" parent="receiving" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- pendingReceiptIds: list[str]" vertex="1">
+          <mxGeometry height="22" width="310" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-field-2" parent="receiving" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- nextIndex: int" vertex="1">
+          <mxGeometry height="22" width="310" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-field-3" parent="receiving" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- capacity: int" vertex="1">
+          <mxGeometry height="22" width="310" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-field-4" parent="receiving" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- dockCode: str" vertex="1">
+          <mxGeometry height="22" width="310" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-divider" parent="receiving" style="line;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="8" width="310" y="142" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-method-0" parent="receiving" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ hasReceipts(): bool" vertex="1">
+          <mxGeometry height="22" width="310" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-method-1" parent="receiving" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ nextReceipt(): str" vertex="1">
+          <mxGeometry height="22" width="310" y="172" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-method-2" parent="receiving" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ enqueueReceipt(receiptId: str): void" vertex="1">
+          <mxGeometry height="22" width="310" y="194" as="geometry" />
+        </mxCell>
+        <mxCell id="receiving-method-3" parent="receiving" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ size(): int" vertex="1">
+          <mxGeometry height="22" width="310" y="216" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="GoodsInspector" vertex="1">
+          <mxGeometry height="238" width="310" x="520" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection-field-0" parent="inspection" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- inspectorId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection-field-1" parent="inspection" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- stationCode: str" vertex="1">
+          <mxGeometry height="22" width="310" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection-field-2" parent="inspection" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- checkedCount: int" vertex="1">
+          <mxGeometry height="22" width="310" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection-field-3" parent="inspection" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- failedCount: int" vertex="1">
+          <mxGeometry height="22" width="310" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection-field-4" parent="inspection" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- lastReceiptId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection-divider" parent="inspection" style="line;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="8" width="310" y="142" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection-method-0" parent="inspection" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ inspectReceipt(receiptId: str): bool" vertex="1">
+          <mxGeometry height="22" width="310" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection-method-1" parent="inspection" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ recordDefect(receiptId: str): void" vertex="1">
+          <mxGeometry height="22" width="310" y="172" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection-method-2" parent="inspection" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ getFailedCount(): int" vertex="1">
+          <mxGeometry height="22" width="310" y="194" as="geometry" />
+        </mxCell>
+        <mxCell id="inspection-method-3" parent="inspection" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ resetCounters(): void" vertex="1">
+          <mxGeometry height="22" width="310" y="216" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="StockInventory" vertex="1">
+          <mxGeometry height="238" width="310" x="970" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-field-0" parent="inventory" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- inventoryId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-field-1" parent="inventory" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- warehouseCode: str" vertex="1">
+          <mxGeometry height="22" width="310" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-field-2" parent="inventory" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- availableUnits: int" vertex="1">
+          <mxGeometry height="22" width="310" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-field-3" parent="inventory" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- reservedUnits: int" vertex="1">
+          <mxGeometry height="22" width="310" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-field-4" parent="inventory" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- lastMovementId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-divider" parent="inventory" style="line;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="8" width="310" y="142" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-method-0" parent="inventory" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ receiveStock(receiptId: str): void" vertex="1">
+          <mxGeometry height="22" width="310" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-method-1" parent="inventory" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ reserveStock(orderId: str): bool" vertex="1">
+          <mxGeometry height="22" width="310" y="172" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-method-2" parent="inventory" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ commitShipment(orderId: str): void" vertex="1">
+          <mxGeometry height="22" width="310" y="194" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-method-3" parent="inventory" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ releaseStock(orderId: str): void" vertex="1">
+          <mxGeometry height="22" width="310" y="216" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="DispatchQueue" vertex="1">
+          <mxGeometry height="238" width="310" x="70" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-field-0" parent="dispatch" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- queueId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-field-1" parent="dispatch" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- pendingOrderIds: list[str]" vertex="1">
+          <mxGeometry height="22" width="310" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-field-2" parent="dispatch" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- nextIndex: int" vertex="1">
+          <mxGeometry height="22" width="310" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-field-3" parent="dispatch" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- priorityOrderCount: int" vertex="1">
+          <mxGeometry height="22" width="310" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-field-4" parent="dispatch" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- cutoffTime: datetime" vertex="1">
+          <mxGeometry height="22" width="310" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-divider" parent="dispatch" style="line;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="8" width="310" y="142" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-method-0" parent="dispatch" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ hasOrders(): bool" vertex="1">
+          <mxGeometry height="22" width="310" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-method-1" parent="dispatch" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ nextOrder(): str" vertex="1">
+          <mxGeometry height="22" width="310" y="172" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-method-2" parent="dispatch" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ enqueueOrder(orderId: str): void" vertex="1">
+          <mxGeometry height="22" width="310" y="194" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatch-method-3" parent="dispatch" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ size(): int" vertex="1">
+          <mxGeometry height="22" width="310" y="216" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="CarrierGateway" vertex="1">
+          <mxGeometry height="238" width="310" x="520" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier-field-0" parent="carrier" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- gatewayId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier-field-1" parent="carrier" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- carrierCode: str" vertex="1">
+          <mxGeometry height="22" width="310" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier-field-2" parent="carrier" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- pickupWindow: str" vertex="1">
+          <mxGeometry height="22" width="310" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier-field-3" parent="carrier" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- bookedCount: int" vertex="1">
+          <mxGeometry height="22" width="310" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier-field-4" parent="carrier" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- lastTrackingId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier-divider" parent="carrier" style="line;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="8" width="310" y="142" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier-method-0" parent="carrier" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ bookShipment(orderId: str): str" vertex="1">
+          <mxGeometry height="22" width="310" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier-method-1" parent="carrier" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ cancelShipment(trackingId: str): void" vertex="1">
+          <mxGeometry height="22" width="310" y="172" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier-method-2" parent="carrier" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ getShipmentStatus(trackingId: str): str" vertex="1">
+          <mxGeometry height="22" width="310" y="194" as="geometry" />
+        </mxCell>
+        <mxCell id="carrier-method-3" parent="carrier" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ isAvailable(): bool" vertex="1">
+          <mxGeometry height="22" width="310" y="216" as="geometry" />
+        </mxCell>
+        <mxCell id="audit" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=14;horizontal=1;childLayout=stackLayout;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="WarehouseAuditLog" vertex="1">
+          <mxGeometry height="238" width="310" x="970" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-field-0" parent="audit" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- logId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-field-1" parent="audit" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- destination: str" vertex="1">
+          <mxGeometry height="22" width="310" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-field-2" parent="audit" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- eventCount: int" vertex="1">
+          <mxGeometry height="22" width="310" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-field-3" parent="audit" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- lastEventType: str" vertex="1">
+          <mxGeometry height="22" width="310" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-field-4" parent="audit" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="- lastEntityId: str" vertex="1">
+          <mxGeometry height="22" width="310" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-divider" parent="audit" style="line;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="8" width="310" y="142" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-method-0" parent="audit" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ recordReceipt(receiptId: str): void" vertex="1">
+          <mxGeometry height="22" width="310" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-method-1" parent="audit" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ recordRejection(receiptId: str): void" vertex="1">
+          <mxGeometry height="22" width="310" y="172" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-method-2" parent="audit" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ recordShipment(trackingId: str): void" vertex="1">
+          <mxGeometry height="22" width="310" y="194" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-method-3" parent="audit" style="text;align=left;verticalAlign=middle;spacingLeft=8;" value="+ recordBackorder(orderId: str): void" vertex="1">
+          <mxGeometry height="22" width="310" y="216" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-receiving" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.18;exitY=0;entryX=0.5;entryY=1;" target="receiving" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-inspection" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" target="inspection" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-inventory" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.82;exitY=0;entryX=0.5;entryY=1;" target="inventory" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-dispatch" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.18;exitY=1;entryX=0.5;entryY=0;" target="dispatch" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-carrier" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="carrier" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uses-audit" edge="1" parent="1" source="coordinator" style="noEdgeStyle=1;dashed=1;endArrow=open;endFill=0;exitX=0.82;exitY=1;entryX=0.5;entryY=0;" target="audit" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
